@@ -3,7 +3,10 @@
 #include "userpage.h"
 #include "ui_userpage.h"
 #include "adminpage.h"
+#include "user.h"
 
+extern vector<User>vecuser;
+extern User CEO;
 FirstWindow::FirstWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::FirstWindow)
@@ -19,8 +22,11 @@ FirstWindow::~FirstWindow()
 
 void FirstWindow::on_pushButton_clicked()
 {
-    QString account = ui->lineEdit->text();
-    QString password = ui->lineEdit_2->text();
+    QString temp =  ui->lineEdit->text();
+    string account = temp.toStdString();
+    temp = ui->lineEdit_2->text();
+    string password = temp.toStdString();
+    //需要一个检查账号代码是否匹配的函数，返回值1或0
     if(account == "admin" && password == "000000") {
         adminPage *a = new adminPage;
         a->show();
@@ -30,10 +36,22 @@ void FirstWindow::on_pushButton_clicked()
         userPage *u = new userPage;
         u->show();
     }
-    //需要一个检查账号代码是否匹配的函数，返回值1或0
+
 }
 
 void FirstWindow::on_lineEdit_2_returnPressed()
 {
     on_pushButton_clicked();
+}
+
+void FirstWindow::on_pushButton_2_clicked()
+{
+    QString temp =  ui->lineEdit->text();
+    string account = temp.toStdString();
+    temp = ui->lineEdit_2->text();
+    string password = temp.toStdString();
+
+
+    CEO.Registers(account, password);
+    CEO.save();
 }

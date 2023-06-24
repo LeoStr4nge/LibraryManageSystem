@@ -3,15 +3,19 @@
 #include<iostream>
 using namespace std;
 
-class user
+class User
 {
-public:
-    void addToFile();
-    void searchInFile();
-    user(string account,string password):account(account),password(password){}
 private:
-    string account;
-    string password;
+    string _phone;//电话
+    string _password;//密码
+public:
+    User() {};
+    void Registers(string setAccount, string setPassword);//注册
+    void Login();//登录
+    void save();//保存
+    void read();//读取
+
 };
+
 
 #endif // USER_H
