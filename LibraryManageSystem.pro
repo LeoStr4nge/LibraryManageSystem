@@ -16,14 +16,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    adminpage.cpp \
+    bookeditpage.cpp \
     main.cpp \
-    firstwindow.cpp
+    firstwindow.cpp \
+    newbookpage.cpp \
+    searchpage.cpp \
+    user.cpp \
+    userpage.cpp
 
 HEADERS += \
-    firstwindow.h
+    adminpage.h \
+    bookeditpage.h \
+    firstwindow.h \
+    newbookpage.h \
+    searchpage.h \
+    user.h \
+    userpage.h
 
 FORMS += \
-    firstwindow.ui
+    adminpage.ui \
+    bookeditpage.ui \
+    firstwindow.ui \
+    newbookpage.ui \
+    searchpage.ui \
+    userpage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

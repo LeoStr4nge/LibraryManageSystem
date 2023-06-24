@@ -15,6 +15,11 @@ public:
     FirstWindow(QWidget *parent = nullptr);
     ~FirstWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_lineEdit_2_returnPressed();
+
 private:
     Ui::FirstWindow *ui;
 };

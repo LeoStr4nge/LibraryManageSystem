@@ -22,7 +22,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>FirstWindow</string>
+   <string>图书馆管理系统</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -97,6 +97,9 @@
           </item>
           <item>
            <widget class="QLineEdit" name="lineEdit_2">
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
             <property name="placeholderText">
              <string>请输入密码</string>
             </property>
