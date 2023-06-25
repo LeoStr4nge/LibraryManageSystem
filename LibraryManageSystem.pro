@@ -23,6 +23,7 @@ SOURCES += \
     newbookpage.cpp \
     searchpage.cpp \
     user.cpp \
+    usercenter.cpp \
     userpage.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     newbookpage.h \
     searchpage.h \
     user.h \
+    usercenter.h \
     userpage.h
 
 FORMS += \
@@ -40,6 +42,7 @@ FORMS += \
     firstwindow.ui \
     newbookpage.ui \
     searchpage.ui \
+    usercenter.ui \
     userpage.ui
 
 # Default rules for deployment.
