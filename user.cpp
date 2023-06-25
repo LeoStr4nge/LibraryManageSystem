@@ -1,25 +1,13 @@
-#include "iostream"
-#include "fstream"
-#include "string"
-#include <conio.h>
-#include "vector"
+#include"iostream"
+#include"fstream"
+#include"string"
+#include<conio.h>
+#include"vector"
+#include"user.h"
+#include"QDebug"
 using namespace std;
 int userCount = 0;
 
-class User
-{
-private:
-    string _phone;//电话
-    string _password;//密码
-public:
-    User() {};
-    void Registers(string setAccount, string setPassword);//注册
-    void Login();//登录
-    void save();//保存
-    void read();//读取
-
-
-};
 
 vector<User>vecuser;
 User CEO;
@@ -82,7 +70,7 @@ void User::Registers(string setAccount, string setPassword)
     {
         if (setAccount == vecuser[i]._phone)
         {
-
+            qDebug("用户已注册");
         }
     }
     tempUser._phone = setAccount;
@@ -92,3 +80,43 @@ void User::Registers(string setAccount, string setPassword)
 
 }
 
+//登录
+int User::Login(string setAccount,string setPassword)
+{
+    CEO.read();
+    User tempUser;
+    tempUser._phone = setAccount;
+    tempUser._password = setPassword;
+    int flag=1;
+    for (int i = 0; i < vecuser.size(); i++)
+    {
+        if (vecuser[i]._phone == tempUser._phone)
+        {
+            flag=0;
+            if (vecuser[i]._password==tempUser._password)
+            {
+                //登陆成功
+                qDebug("登陆成功");
+                //返回1
+                return 1;
+            }
+            else
+            {
+                //登录失败
+                qDebug("密码错误");
+                //返回0
+                return 0;
+
+            }
+
+        }
+
+    }
+    if(flag)
+    {
+    //用户名未注册
+    qDebug("用户未注册");
+    //返回-1
+    return -1;
+    }
+}

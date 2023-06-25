@@ -27,6 +27,9 @@ void FirstWindow::on_pushButton_clicked()
     temp = ui->lineEdit_2->text();
     string password = temp.toStdString();
     //需要一个检查账号代码是否匹配的函数，返回值1或0
+
+    CEO.Login(account,password);
+
     if(account == "admin" && password == "000000") {
         adminPage *a = new adminPage;
         a->show();
@@ -36,6 +39,7 @@ void FirstWindow::on_pushButton_clicked()
         userPage *u = new userPage;
         u->show();
     }
+
 
 }
 
