@@ -16,32 +16,41 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    acterror.cpp \
     adminpage.cpp \
     bookeditpage.cpp \
     main.cpp \
     firstwindow.cpp \
     newbookpage.cpp \
+    pwderror.cpp \
     searchpage.cpp \
+    signsuccess.cpp \
     user.cpp \
     usercenter.cpp \
     userpage.cpp
 
 HEADERS += \
+    acterror.h \
     adminpage.h \
     bookeditpage.h \
     firstwindow.h \
     newbookpage.h \
+    pwderror.h \
     searchpage.h \
+    signsuccess.h \
     user.h \
     usercenter.h \
     userpage.h
 
 FORMS += \
+    acterror.ui \
     adminpage.ui \
     bookeditpage.ui \
     firstwindow.ui \
     newbookpage.ui \
+    pwderror.ui \
     searchpage.ui \
+    signsuccess.ui \
     usercenter.ui \
     userpage.ui
 
