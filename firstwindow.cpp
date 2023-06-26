@@ -9,6 +9,7 @@
 #include "signsuccess.h"
 #include <QValidator>
 
+
 extern vector<User>vecuser;
 extern User CEO;
 FirstWindow::FirstWindow(QWidget *parent)

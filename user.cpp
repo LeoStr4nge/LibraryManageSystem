@@ -23,6 +23,8 @@ void User::save()
     {
         ofile <<vecuser[i]._phone << endl;
         ofile <<vecuser[i]._password << endl;
+        ofile <<vecuser[i]._xuehao<<endl;
+        ofile <<vecuser[i]._xingming<<endl;
     }
     ofile.close();
 }
@@ -49,8 +51,10 @@ void User::read()
     {
 
         ifile >> tempUser._password;
+        ifile >> tempUser._xuehao;
+        ifile >> tempUser._xingming;
         vecuser.push_back(tempUser);
-        cout<<vecuser[i]._phone;
+
         userCount++;
     }
     userCount--;
@@ -58,13 +62,10 @@ void User::read()
 }
 
 //注册
-void User::Registers(string setAccount, string setPassword)
+void User::Registers(string setAccount, string setPassword,string setXuehao,string setXingming)
 {
     CEO.read();
     User tempUser;
-    string pw1;
-    string pw2;
-
 
     for (int i = 0; i <vecuser.size(); i++)
     {
@@ -73,15 +74,19 @@ void User::Registers(string setAccount, string setPassword)
             qDebug("用户已注册");
         }
     }
+
     tempUser._phone = setAccount;
     tempUser._password = setPassword;
+    tempUser._xuehao=setXuehao;
+    tempUser._xingming=setXingming;
+
     vecuser.push_back(tempUser);
-    cout<<vecuser[0]._phone;
+
 
 }
 
 //登录
-int User::Login(string setAccount,string setPassword)
+int User::Login(string setAccount, string setPassword)
 {
     CEO.read();
     User tempUser;
@@ -97,6 +102,10 @@ int User::Login(string setAccount,string setPassword)
             {
                 //登陆成功
                 qDebug("登陆成功");
+                //获取信息
+                tempUser._xuehao=vecuser[i]._xuehao;
+                tempUser._xingming=vecuser[i]._xingming;
+                CEO=tempUser;
                 //返回1
                 return 1;
             }
@@ -119,4 +128,40 @@ int User::Login(string setAccount,string setPassword)
     //返回-1
     return -1;
     }
+}
+
+
+//修改
+void User::xiugai()
+{
+    CEO.read();
+    User tempUser;
+    tempUser=CEO;
+    for (int i = 0; i < vecuser.size(); i++)
+    {
+        if (vecuser[i]._phone == tempUser._phone)
+        {
+
+            vecuser[i]=tempUser;
+        }
+    }
+
+}
+
+//注销
+void User::zhuxiao()
+{
+    CEO.read();
+    User tempUser;
+    tempUser=CEO;
+    for (int i = 0; i < vecuser.size(); i++)
+    {
+        if (vecuser[i]._phone == tempUser._phone)
+        {
+            //删除该元素
+
+
+        }
+    }
+
 }

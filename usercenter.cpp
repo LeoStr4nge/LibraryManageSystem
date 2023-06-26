@@ -29,6 +29,7 @@ void userCenter::on_pushButton_clicked()
     userPage *u = new userPage;
     u->show();
     this->close();
+
 }
 void userCenter::on_checkBox_stateChanged(int arg1)
 {
