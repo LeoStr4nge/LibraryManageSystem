@@ -79,7 +79,7 @@
           <item>
            <widget class="QLineEdit" name="lineEdit">
             <property name="placeholderText">
-             <string>仅允许数字字母和_- 最大长度10</string>
+             <string>请输入账号</string>
             </property>
            </widget>
           </item>
@@ -89,7 +89,7 @@
              <enum>QLineEdit::Password</enum>
             </property>
             <property name="placeholderText">
-             <string>仅允许数字字母和_- 最大长度16</string>
+             <string>请输入密码</string>
             </property>
            </widget>
           </item>

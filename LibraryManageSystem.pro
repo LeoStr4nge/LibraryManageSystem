@@ -22,9 +22,11 @@ SOURCES += \
     main.cpp \
     firstwindow.cpp \
     newbookpage.cpp \
+    pwdcmperror.cpp \
     pwderror.cpp \
     searchpage.cpp \
     signsuccess.cpp \
+    signuppage.cpp \
     user.cpp \
     usercenter.cpp \
     userpage.cpp
@@ -35,9 +37,11 @@ HEADERS += \
     bookeditpage.h \
     firstwindow.h \
     newbookpage.h \
+    pwdcmperror.h \
     pwderror.h \
     searchpage.h \
     signsuccess.h \
+    signuppage.h \
     user.h \
     usercenter.h \
     userpage.h
@@ -48,9 +52,11 @@ FORMS += \
     bookeditpage.ui \
     firstwindow.ui \
     newbookpage.ui \
+    pwdcmperror.ui \
     pwderror.ui \
     searchpage.ui \
     signsuccess.ui \
+    signuppage.ui \
     usercenter.ui \
     userpage.ui
 

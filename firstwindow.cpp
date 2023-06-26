@@ -6,9 +6,9 @@
 #include "user.h"
 #include "pwderror.h"
 #include "acterror.h"
-#include "signsuccess.h"
 #include <QValidator>
-
+#include "signuppage.h"
+#include "signuppage.h"
 
 extern vector<User>vecuser;
 extern User CEO;
@@ -73,16 +73,9 @@ void FirstWindow::on_lineEdit_2_returnPressed()
 //注册按钮
 void FirstWindow::on_pushButton_2_clicked()
 {
-    QString temp =  ui->lineEdit->text();
-    string account = temp.toStdString();
-    temp = ui->lineEdit_2->text();
-    string password = temp.toStdString();
-
-
-    CEO.Registers(account, password);//需要返回值来确认是否注册成功
-    CEO.save();
-    signSuccess *s = new signSuccess;
+    signUpPage *s = new signUpPage;
     s->show();
+    this->close();
 }
 //显示密码
 void FirstWindow::on_checkBox_stateChanged(int arg1)
