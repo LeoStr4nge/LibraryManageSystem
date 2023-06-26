@@ -7,6 +7,7 @@
 #include "pwderror.h"
 #include "acterror.h"
 #include "signsuccess.h"
+#include <QValidator>
 
 extern vector<User>vecuser;
 extern User CEO;
@@ -15,6 +16,15 @@ FirstWindow::FirstWindow(QWidget *parent)
     , ui(new Ui::FirstWindow)
 {
     ui->setupUi(this);
+    //设置非法输入
+    //账号
+    QRegExp regx("[a-zA-Z0-9\-\\\_]{10}");
+    QValidator *validator = new QRegExpValidator(regx,ui->lineEdit);
+    ui->lineEdit->setValidator(validator);
+    //密码
+    QRegExp regx2("[a-zA-Z0-9\-\\\_]{16}");
+    QValidator *validator2 = new QRegExpValidator(regx2,ui->lineEdit_2);
+    ui->lineEdit_2->setValidator(validator2);
 }
 
 FirstWindow::~FirstWindow()
@@ -29,8 +39,9 @@ void FirstWindow::on_pushButton_clicked()
     string account = temp.toStdString();
     temp = ui->lineEdit_2->text();
     string password = temp.toStdString();
-    //需要一个检查账号代码是否匹配的函数，返回值1或0
+    //检查用户输入的账号
     int flag = CEO.Login(account,password);
+    //管理员账号
     if(account == "admin" && password == "000000") {
         adminPage *a = new adminPage;
         a->show();

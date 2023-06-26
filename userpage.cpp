@@ -2,6 +2,7 @@
 #include "ui_userpage.h"
 #include "searchpage.h"
 #include "ui_searchpage.h"
+#include "usercenter.h"
 
 userPage::userPage(QWidget *parent) :
     QWidget(parent),
@@ -19,5 +20,12 @@ void userPage::on_pushButton_clicked()
 {
     searchPage *s = new searchPage;
     s->show();
+    this->close();
+}
+
+void userPage::on_pushButton_2_clicked()
+{
+    userCenter *u = new userCenter;
+    u->show();
     this->close();
 }

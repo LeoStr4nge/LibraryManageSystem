@@ -27,7 +27,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QLabel" name="label">
         <property name="sizePolicy">
@@ -57,11 +57,29 @@
          </spacer>
         </item>
         <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>账号：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>密码：</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QLineEdit" name="lineEdit">
             <property name="placeholderText">
-             <string>请输入账号</string>
+             <string>仅允许数字字母和_- 最大长度10</string>
             </property>
            </widget>
           </item>
@@ -71,7 +89,7 @@
              <enum>QLineEdit::Password</enum>
             </property>
             <property name="placeholderText">
-             <string>请输入密码</string>
+             <string>仅允许数字字母和_- 最大长度16</string>
             </property>
            </widget>
           </item>
