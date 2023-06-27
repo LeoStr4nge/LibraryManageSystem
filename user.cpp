@@ -5,6 +5,7 @@
 #include"vector"
 #include"user.h"
 #include"QDebug"
+#include"errors.h"
 using namespace std;
 int userCount = 0;
 
@@ -18,7 +19,10 @@ void User::save()
 {
     ofstream ofile;
     ofile.open("user.txt", ios::out);
-
+    if(!ofile.is_open()){
+        string error = "无法打开文件user.txt";
+        throw fileError(error);
+    }
     for (int i = 0; i < vecuser.size(); i++)
     {
         ofile <<vecuser[i]._phone << endl;
@@ -43,8 +47,8 @@ void User::read()
 
     if (!ifile.is_open())
     {
-        //cout << "文件打开失败！" << endl;
-        return ;
+        string error = "无法打开user.txt";
+        throw fileError(error);
     }
 
     for (int i = 0; ifile>>tempUser._phone; i++)
@@ -62,16 +66,23 @@ void User::read()
 }
 
 //注册
-void User::Registers(string setAccount, string setPassword,string setXuehao,string setXingming)
+int User::Registers(string setAccount, string setPassword,string setXuehao,string setXingming)
 {
-    CEO.read();
+    //检测异常继续向上抛出
+    try {
+        CEO.read();
+    } catch (fileError &e) {
+        throw e;
+    }
+
     User tempUser;
 
     for (int i = 0; i <vecuser.size(); i++)
     {
         if (setAccount == vecuser[i]._phone)
         {
-            qDebug("用户已注册");
+            qDebug("该手机号已注册");
+            return 0;
         }
     }
 
@@ -81,14 +92,22 @@ void User::Registers(string setAccount, string setPassword,string setXuehao,stri
     tempUser._xingming=setXingming;
 
     vecuser.push_back(tempUser);
-
+    CEO.save();
+    qDebug("注册成功");
+    return 1;
 
 }
 
 //登录
 int User::Login(string setAccount, string setPassword)
 {
-    CEO.read();
+    //检测异常继续向上抛出
+    try {
+        CEO.read();
+    } catch (fileError &e) {
+        throw e;
+    }
+
     User tempUser;
     tempUser._phone = setAccount;
     tempUser._password = setPassword;
@@ -134,7 +153,12 @@ int User::Login(string setAccount, string setPassword)
 //修改
 void User::xiugai()
 {
-    CEO.read();
+    try {
+        CEO.read();
+    } catch (fileError &e) {
+        throw e;
+    }
+
     User tempUser;
     tempUser=CEO;
     for (int i = 0; i < vecuser.size(); i++)
@@ -151,7 +175,11 @@ void User::xiugai()
 //注销
 void User::zhuxiao()
 {
-    CEO.read();
+    try {
+        CEO.read();
+    } catch (fileError &e) {
+        throw e;
+    }
     User tempUser;
     tempUser=CEO;
     for (int i = 0; i < vecuser.size(); i++)

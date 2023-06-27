@@ -35,6 +35,7 @@ HEADERS += \
     acterror.h \
     adminpage.h \
     bookeditpage.h \
+    errors.h \
     firstwindow.h \
     newbookpage.h \
     pwdcmperror.h \

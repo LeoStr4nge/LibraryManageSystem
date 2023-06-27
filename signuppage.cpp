@@ -3,6 +3,12 @@
 #include "firstwindow.h"
 #include "pwdcmperror.h"
 #include <QValidator>
+#include "user.h"
+#include "signsuccess.h"
+
+extern vector<User>vecuser;
+extern User CEO;
+
 signUpPage::signUpPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::signUpPage)
@@ -57,12 +63,17 @@ void signUpPage::on_pushButton_clicked()
     //比较两次密码是否一致
     if(tempPwd == tempPwd2){
         password = tempPwd;//密码
+        if(CEO.Registers(phone,password,studentID,name)){
+            signSuccess *s = new signSuccess;
+            s->show();
+        }
     }else{
         pwdCmpError *p = new pwdCmpError;
         p->show();
     }
-}
 
+}
+//显示密码
 void signUpPage::on_checkBox_stateChanged(int arg1)
 {
     if(ui->checkBox->isChecked()){
@@ -72,4 +83,9 @@ void signUpPage::on_checkBox_stateChanged(int arg1)
         ui->lineEdit_4->setEchoMode(QLineEdit::Password);
         ui->lineEdit_5->setEchoMode(QLineEdit::Password);
     }
+}
+//回车触发注册按钮
+void signUpPage::on_lineEdit_5_returnPressed()
+{
+    on_pushButton_clicked();
 }

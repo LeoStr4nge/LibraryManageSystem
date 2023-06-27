@@ -13,7 +13,7 @@ private:
 
 public:
     User() {};
-    void Registers(string setAccount, string setPassword,string setXuehao,string setXingming);//注册
+    int Registers(string setAccount, string setPassword,string setXuehao,string setXingming);//注册
     int Login(string setAccount, string setPassword);//登录
     void save();//保存
     void read();//读取

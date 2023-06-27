@@ -22,6 +22,8 @@ private slots:
 
     void on_checkBox_stateChanged(int arg1);
 
+    void on_lineEdit_5_returnPressed();
+
 private:
     Ui::signUpPage *ui;
 };

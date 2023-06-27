@@ -8,7 +8,7 @@
 #include "acterror.h"
 #include <QValidator>
 #include "signuppage.h"
-#include "signuppage.h"
+#include "errors.h"
 
 extern vector<User>vecuser;
 extern User CEO;
@@ -19,7 +19,7 @@ FirstWindow::FirstWindow(QWidget *parent)
     ui->setupUi(this);
     //设置非法输入
     //账号
-    QRegExp regx("[a-zA-Z0-9\-\\\_]{10}");
+    QRegExp regx("[a-zA-Z0-9\-\\\_]{11}");
     QValidator *validator = new QRegExpValidator(regx,ui->lineEdit);
     ui->lineEdit->setValidator(validator);
     //密码
@@ -41,29 +41,31 @@ void FirstWindow::on_pushButton_clicked()
     temp = ui->lineEdit_2->text();
     string password = temp.toStdString();
     //检查用户输入的账号
-    int flag = CEO.Login(account,password);
     //管理员账号
     if(account == "admin" && password == "000000") {
         adminPage *a = new adminPage;
         a->show();
         this->close();
     }else{
-        if(flag == 1){
-            this->close();
-            userPage *u = new userPage;
-            u->show();
-        }
-        else if(flag == 0){
+        try {
+            int flag = CEO.Login(account,password);
+            if(flag == 1){
+                this->close();
+                userPage *u = new userPage;
+                u->show();
+            }
+            else if(flag == 0){
             pwdError *p = new pwdError;
             p->show();
         }
-        else if(flag == -1){
-            actError *a = new actError;
-            a->show();
+            else if(flag == -1){
+                actError *a = new actError;
+                a->show();
+            }
+        } catch (fileError &e) {
+            e.what();
         }
     }
-
-
 }
 //回车触发登录按钮
 void FirstWindow::on_lineEdit_2_returnPressed()
