@@ -57,7 +57,7 @@ void FirstWindow::on_pushButton_clicked()
             else if(flag == 0){
             pwdError *p = new pwdError;
             p->show();
-        }
+            }
             else if(flag == -1){
                 actError *a = new actError;
                 a->show();

@@ -8,6 +8,7 @@
 
 extern vector<User>vecuser;
 extern User CEO;
+extern struct currentUser crtUser;
 
 signUpPage::signUpPage(QWidget *parent) :
     QWidget(parent),

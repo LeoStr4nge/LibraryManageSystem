@@ -193,3 +193,20 @@ void User::zhuxiao()
     }
 
 }
+
+//导出类内信息
+QString User::qName()
+{
+    QString name = QString::fromStdString(_xingming);
+    return name;
+}
+QString User::qStudentID()
+{
+    QString studentID = QString::fromStdString(_xuehao);
+    return studentID;
+}
+QString User::qPhone()
+{
+    QString phone = QString::fromStdString(_phone);
+    return phone;
+}

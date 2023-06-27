@@ -1,6 +1,7 @@
 #ifndef USER_H
 #define USER_H
 #include<iostream>
+#include<QString>
 using namespace std;
 
 class User
@@ -19,7 +20,9 @@ public:
     void read();//读取
     void xiugai();//修改
     void zhuxiao();//注销
-
+    QString qName();
+    QString qPhone();
+    QString qStudentID();
 
 };
 
