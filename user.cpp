@@ -151,14 +151,18 @@ int User::Login(string setAccount, string setPassword)
 
 
 //修改
-void User::xiugai()
+void User::edit(string name,string phone,string studentID,string password)
 {
     try {
         CEO.read();
     } catch (fileError &e) {
         throw e;
     }
-
+    //修改CEO里的信息
+    CEO._xingming = name;
+    CEO._phone = phone;
+    CEO._xuehao = studentID;
+    CEO._password = password;
     User tempUser;
     tempUser=CEO;
     for (int i = 0; i < vecuser.size(); i++)
@@ -213,4 +217,8 @@ QString User::qPhone()
 {
     QString phone = QString::fromStdString(_phone);
     return phone;
+}
+string User::stdPassword()
+{
+    return _password;
 }

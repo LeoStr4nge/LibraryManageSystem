@@ -19,6 +19,7 @@ SOURCES += \
     acterror.cpp \
     adminpage.cpp \
     bookeditpage.cpp \
+    editsuccess.cpp \
     main.cpp \
     firstwindow.cpp \
     newbookpage.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     acterror.h \
     adminpage.h \
     bookeditpage.h \
+    editsuccess.h \
     errors.h \
     firstwindow.h \
     newbookpage.h \
@@ -51,6 +53,7 @@ FORMS += \
     acterror.ui \
     adminpage.ui \
     bookeditpage.ui \
+    editsuccess.ui \
     firstwindow.ui \
     newbookpage.ui \
     pwdcmperror.ui \

@@ -18,11 +18,12 @@ public:
     int Login(string setAccount, string setPassword);//登录
     void save();//保存
     void read();//读取
-    void xiugai();//修改
+    void edit(string name,string phone,string studentID,string password);//修改
     void zhuxiao();//注销
     QString qName();
     QString qPhone();
     QString qStudentID();
+    string stdPassword();
 
 };
 

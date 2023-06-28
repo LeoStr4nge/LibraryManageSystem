@@ -3,6 +3,8 @@
 #include "userpage.h"
 #include <QValidator>
 #include "user.h"
+#include "firstwindow.h"
+#include "editsuccess.h"
 extern User CEO;
 
 userCenter::userCenter(QWidget *parent) :
@@ -56,4 +58,39 @@ void userCenter::on_checkBox_stateChanged(int arg1)
         ui->lineEdit_2->setEchoMode(QLineEdit::Password);
         ui->lineEdit_3->setEchoMode(QLineEdit::Password);
     }
+}
+
+void userCenter::on_pushButton_2_clicked()
+{
+    QString temp = ui->lineEdit->text();
+    std::string name = temp.toStdString();//姓名
+    temp = ui->lineEdit_4->text();
+    std::string phone = temp.toStdString();//手机号
+    temp = ui->lineEdit_5->text();
+    std::string studentID = temp.toStdString();//学号
+    temp = ui->lineEdit_2->text();
+    std::string tempPwd = temp.toStdString();//临时密码1
+    temp = ui->lineEdit_3->text();
+    std::string tempPwd2 = temp.toStdString();//临时密码2
+    std::string password;
+    //比较两次密码是否一致
+    if(tempPwd == tempPwd2){
+        if(temp == NULL){
+            password = CEO.stdPassword();//原密码
+        }else{
+            password = tempPwd;//新密码
+        }
+        CEO.edit(name, phone, studentID, password);
+        editSuccess * e = new editSuccess;
+        e->show();
+    }
+
+}
+
+void userCenter::on_pushButton_3_clicked()
+{
+    CEO.zhuxiao();
+    FirstWindow *f = new FirstWindow;
+    f->show();
+    this->close();
 }
