@@ -119,18 +119,20 @@
             </layout>
            </item>
            <item>
-            <widget class="QTextBrowser" name="textBrowser">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+            <widget class="QScrollArea" name="scrollArea">
+             <property name="widgetResizable">
+              <bool>true</bool>
              </property>
-             <property name="font">
-              <font>
-               <family>微软雅黑</family>
-              </font>
-             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>214</width>
+                <height>82</height>
+               </rect>
+              </property>
+             </widget>
             </widget>
            </item>
           </layout>

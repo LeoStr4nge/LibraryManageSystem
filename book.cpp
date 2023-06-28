@@ -23,8 +23,8 @@ void book::save()
         ofile <<vecbook[i]._zuozhe << endl;
         ofile <<vecbook[i]._chubanshe<<endl;
         ofile <<vecbook[i]._ISBN<<endl;
-        ofile <<vecbook[i]._leibei << endl;
-        ofile << vecbook[i]._gotmie << endl;
+        ofile <<vecbook[i]._leibie << endl;
+        ofile << vecbook[i]._gotime << endl;
     }
     ofile.close();
 }
@@ -45,8 +45,8 @@ void book::read()
         ifile >> tempBook._zuozhe;
         ifile >> tempBook._chubanshe;
         ifile >> tempBook._ISBN;
-        ifile >> tempBook._leibei;
-        ifile >> tempBook._gotmie;
+        ifile >> tempBook._leibie;
+        ifile >> tempBook._gotime;
         vecbook.push_back(tempBook);
 
     }
@@ -55,7 +55,7 @@ void book::read()
 }
 
 //添加
-int book::add(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime)
+int book::add(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibie, int setGotime)
 {
     book tempBook;
 
@@ -72,8 +72,8 @@ int book::add(string setBookname, string setZuozhe, string setCubanshe, string s
     tempBook._zuozhe = setZuozhe;
     tempBook._chubanshe = setCubanshe;
     tempBook._ISBN = setISBN;
-    tempBook._leibei = setLeibei;
-    tempBook._gotmie = setGotime;
+    tempBook._leibie = setLeibie;
+    tempBook._gotime = setGotime;
 
     vecbook.push_back(tempBook);
     bookCEO.save();
@@ -108,8 +108,8 @@ void book::xiugai(string setBookname, string setZuozhe, string setCubanshe, stri
     tempUser._zuozhe = setZuozhe;
     tempUser._chubanshe = setCubanshe;
     tempUser._ISBN = setISBN;
-    tempUser._leibei = setLeibei;
-    tempUser._gotmie = setGotime;
+    tempUser._leibie = setLeibei;
+    tempUser._gotime = setGotime;
 
     for (int i = 0; i < vecbook.size(); i++)
     {
@@ -156,7 +156,7 @@ string book::sousuo(string sousuoci)
 
     for (int i = 0; i < vecbook.size(); i++)
     {
-        if (vecbook[i]._leibei == sousuoci)
+        if (vecbook[i]._leibie == sousuoci)
         {
             return vecbook[i]._ISBN;
         }
@@ -181,6 +181,6 @@ QString book::qBookname(){return QString::fromStdString(_bookName);}
 QString book::qZuozhe(){return QString::fromStdString(_zuozhe);};
 QString book::qChubanshe(){return QString::fromStdString(_chubanshe);};
 QString book::qISBN(){return QString::fromStdString(_ISBN);};
-QString book::qLeibei(){return QString::fromStdString(_leibei);};
-int book::qgotmie(){return _gotmie;};
+QString book::qLeibei(){return QString::fromStdString(_leibie);};
+int book::qgotmie(){return _gotime;};
 

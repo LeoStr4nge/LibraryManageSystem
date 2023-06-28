@@ -31,5 +31,4 @@ void searchPage::on_lineEdit_returnPressed()
 void searchPage::on_pushButton_clicked()
 {
     QString s = ui->lineEdit->text();
-    ui->textBrowser->append(s);
 }

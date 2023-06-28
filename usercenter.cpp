@@ -4,8 +4,9 @@
 #include <QValidator>
 #include "user.h"
 #include "firstwindow.h"
-#include "editsuccess.h"
+#include "dialog.h"
 extern User CEO;
+extern QString DIALOGMSG;
 
 userCenter::userCenter(QWidget *parent) :
     QWidget(parent),
@@ -81,8 +82,9 @@ void userCenter::on_pushButton_2_clicked()
             password = tempPwd;//新密码
         }
         CEO.edit(name, phone, studentID, password);
-        editSuccess * e = new editSuccess;
-        e->show();
+       DIALOGMSG = "编辑成功";
+       auto d = new Dialog ;
+       d->show();
     }
 
 }

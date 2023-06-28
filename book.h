@@ -29,8 +29,8 @@ private:
     string _zuozhe;
     string _chubanshe;
     string _ISBN;
-    string _leibei;
-    int _gotmie;
+    string _leibie;
+    int _gotime;
 
 };
 

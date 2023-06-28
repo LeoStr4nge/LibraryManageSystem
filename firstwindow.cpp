@@ -9,9 +9,12 @@
 #include <QValidator>
 #include "signuppage.h"
 #include "errors.h"
+#include "dialog.h"
 
 extern vector<User>vecuser;
 extern User CEO;
+extern QString DIALOGMSG;
+
 FirstWindow::FirstWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::FirstWindow)
@@ -55,23 +58,24 @@ void FirstWindow::on_pushButton_clicked()
                 u->show();
             }
             else if(flag == 0){
-            pwdError *p = new pwdError;
-            p->show();
+                DIALOGMSG = "密码错误";
+                auto d = new Dialog;
+                d->show();
             }
             else if(flag == -1){
-                actError *a = new actError;
-                a->show();
+                DIALOGMSG = "该电话号码未注册";
+                auto d = new Dialog;
+                d->show();
             }
         } catch (fileError &e) {
-            e.what();
+            DIALOGMSG = e.what();
+            auto d = new Dialog;
+            d->show();
         }
     }
 }
-//回车触发登录按钮
-void FirstWindow::on_lineEdit_2_returnPressed()
-{
-    on_pushButton_clicked();
-}
+//由于限制输入，回车不能用于触发登录
+
 //注册按钮
 void FirstWindow::on_pushButton_2_clicked()
 {

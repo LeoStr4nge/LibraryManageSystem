@@ -1,14 +1,14 @@
 #include "signuppage.h"
 #include "ui_signuppage.h"
 #include "firstwindow.h"
-#include "pwdcmperror.h"
 #include <QValidator>
 #include "user.h"
-#include "signsuccess.h"
+#include "dialog.h"
 
 extern vector<User>vecuser;
 extern User CEO;
 extern struct currentUser crtUser;
+extern QString DIALOGMSG;
 
 signUpPage::signUpPage(QWidget *parent) :
     QWidget(parent),
@@ -60,19 +60,33 @@ void signUpPage::on_pushButton_clicked()
     std::string tempPwd = temp.toStdString();
     temp = ui->lineEdit_5->text();
     std::string tempPwd2 = temp.toStdString();
-    std::string password;
-    //比较两次密码是否一致
-    if(tempPwd == tempPwd2){
-        password = tempPwd;//密码
-        if(CEO.Registers(phone,password,studentID,name)){
-            signSuccess *s = new signSuccess;
-            s->show();
-        }
+    //检查有无空白输入
+    if(name.empty()||studentID.empty()||phone.empty()||tempPwd.empty()||tempPwd2.empty()){
+        DIALOGMSG = "请完整填写";
+        auto d = new Dialog;
+        d->show();
     }else{
-        pwdCmpError *p = new pwdCmpError;
-        p->show();
+        std::string password;
+        //比较两次密码是否一致
+        if(tempPwd == tempPwd2){
+            password = tempPwd;//密码
+            int flag = CEO.Registers(phone,password,studentID,name);
+            if(flag == 1){
+                DIALOGMSG = "注册成功";
+                auto d = new Dialog;
+                d->show();
+            }
+            else if(flag == 0){
+                DIALOGMSG = "该手机号已注册";
+                auto d = new Dialog;
+                d->show();
+            }
+        }else{
+            DIALOGMSG = "两次密码不一致";
+            auto d = new Dialog;
+            d->show();
+        }
     }
-
 }
 //显示密码
 void signUpPage::on_checkBox_stateChanged(int arg1)
