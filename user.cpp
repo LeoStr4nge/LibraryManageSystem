@@ -167,6 +167,7 @@ void User::xiugai()
         {
 
             vecuser[i]=tempUser;
+            CEO.save();
         }
     }
 
@@ -182,13 +183,16 @@ void User::zhuxiao()
     }
     User tempUser;
     tempUser=CEO;
-    for (int i = 0; i < vecuser.size(); i++)
+    vector<User>::iterator it;
+
+
+    for (it=vecuser.begin();it!=vecuser.end();it++)
     {
-        if (vecuser[i]._phone == tempUser._phone)
+        if ( it->_phone == tempUser._phone)
         {
             //删除该元素
-
-
+            vecuser.erase(it);
+            CEO.save();
         }
     }
 
