@@ -2,6 +2,7 @@
 #define BOOK_H
 #include<iostream>
 #include<QString>
+#include<vector>
 using namespace std;
 
 class book
@@ -14,13 +15,13 @@ public:
     int add(string setBookname,string setZuozhe,string setCubanshe,string setISBN,string setLeibei,int setGotime);
     void del(string setISBN);
     void xiugai(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime);
-    string sousuo(string sousuoci);
+    vector<int> sousuo(string sousuoci);
     QString qBookname();
-    QString qZuozhe();
-    QString qChubanshe();
+    QString qAuthor();
+    QString qPublisher();
     QString qISBN();
-    QString qLeibei();
-    int qgotmie();
+    QString qType();
+    int qGotime();
 
 
 

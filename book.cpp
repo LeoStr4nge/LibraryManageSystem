@@ -125,13 +125,15 @@ void book::xiugai(string setBookname, string setZuozhe, string setCubanshe, stri
 
 
 //搜索
-string book::sousuo(string sousuoci)
+vector<int> book::sousuo(string sousuoci)
 {
+    bookCEO.read();
+    vector<int> result;
     for (int i = 0; i < vecbook.size(); i++)
     {
         if (vecbook[i]._bookName==sousuoci)
         {
-            return vecbook[i]._ISBN;
+            result.push_back(i);
         }
 
     }
@@ -140,7 +142,7 @@ string book::sousuo(string sousuoci)
     {
         if (vecbook[i]._chubanshe == sousuoci)
         {
-            return vecbook[i]._ISBN;
+            result.push_back(i);
         }
 
     }
@@ -149,7 +151,7 @@ string book::sousuo(string sousuoci)
     {
         if (vecbook[i]._ISBN == sousuoci)
         {
-            return vecbook[i]._ISBN;
+            result.push_back(i);
         }
 
     }
@@ -158,7 +160,7 @@ string book::sousuo(string sousuoci)
     {
         if (vecbook[i]._leibie == sousuoci)
         {
-            return vecbook[i]._ISBN;
+            result.push_back(i);
         }
 
     }
@@ -167,20 +169,19 @@ string book::sousuo(string sousuoci)
     {
         if (vecbook[i]._zuozhe == sousuoci)
         {
-            return vecbook[i]._ISBN;
+            result.push_back(i);
         }
 
     }
-
-
+    return result;
 }
 
 
 //返回信息函数
 QString book::qBookname(){return QString::fromStdString(_bookName);}
-QString book::qZuozhe(){return QString::fromStdString(_zuozhe);};
-QString book::qChubanshe(){return QString::fromStdString(_chubanshe);};
+QString book::qAuthor(){return QString::fromStdString(_zuozhe);};
+QString book::qPublisher(){return QString::fromStdString(_chubanshe);};
 QString book::qISBN(){return QString::fromStdString(_ISBN);};
-QString book::qLeibei(){return QString::fromStdString(_leibie);};
-int book::qgotmie(){return _gotime;};
+QString book::qType(){return QString::fromStdString(_leibie);};
+int book::qGotime(){return _gotime;};
 

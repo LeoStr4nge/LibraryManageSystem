@@ -23,7 +23,7 @@ void bookEditPage::on_pushButton_3_clicked()
     this->close();
 }
 
-//新建书本页面
+//添加书本页面
 void bookEditPage::on_pushButton_2_clicked()
 {
     newBookPage *n = new newBookPage;

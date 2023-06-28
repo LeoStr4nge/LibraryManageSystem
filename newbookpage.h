@@ -15,6 +15,11 @@ public:
     explicit newBookPage(QWidget *parent = nullptr);
     ~newBookPage();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_lineEditISBN_returnPressed();
+
 private:
     Ui::newBookPage *ui;
 };

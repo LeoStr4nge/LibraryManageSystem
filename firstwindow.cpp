@@ -4,8 +4,6 @@
 #include "ui_userpage.h"
 #include "adminpage.h"
 #include "user.h"
-#include "pwderror.h"
-#include "acterror.h"
 #include <QValidator>
 #include "signuppage.h"
 #include "errors.h"
