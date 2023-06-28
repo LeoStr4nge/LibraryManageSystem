@@ -12,6 +12,7 @@ private:
     string _xuehao;//学号
     string _xingming;//姓名
 
+
 public:
     User() {};
     int Registers(string setAccount, string setPassword,string setXuehao,string setXingming);//注册

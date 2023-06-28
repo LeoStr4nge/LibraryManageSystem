@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     acterror.cpp \
     adminpage.cpp \
+    book.cpp \
     bookeditpage.cpp \
     editsuccess.cpp \
     main.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 HEADERS += \
     acterror.h \
     adminpage.h \
+    book.h \
     bookeditpage.h \
     editsuccess.h \
     errors.h \
