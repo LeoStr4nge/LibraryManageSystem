@@ -18,8 +18,7 @@ void book::save()
 {
     ofstream ofile;
     ofile.open("book.txt", ios::out);
-
-
+//
 
     for (int i = 0; i < vecbook.size(); i++)
     {
@@ -148,10 +147,11 @@ vector<int> book::sousuo(string sousuoci)
         if (sousuoci.empty())
         {
             result.push_back(i);
+            return result;
         }
 
     }
-    return result;
+
 
 
     for (int i = 0; i < vecbook.size(); i++)
@@ -162,6 +162,7 @@ vector<int> book::sousuo(string sousuoci)
         }
 
     }
+
     return result;
 }
 
