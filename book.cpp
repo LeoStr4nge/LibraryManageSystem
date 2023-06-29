@@ -11,11 +11,15 @@
 vector<book>vecbook;
 book bookCEO;
 
+//排序
+
 //保存
 void book::save()
 {
     ofstream ofile;
-     ofile.open("book.txt", ios::out);
+    ofile.open("book.txt", ios::out);
+
+
 
     for (int i = 0; i < vecbook.size(); i++)
     {
@@ -25,6 +29,7 @@ void book::save()
         ofile <<vecbook[i]._ISBN<<endl;
         ofile <<vecbook[i]._leibie << endl;
         ofile << vecbook[i]._gotime << endl;
+        ofile<<vecbook[i]._flagExist<<endl;
     }
     ofile.close();
 }
@@ -47,6 +52,7 @@ void book::read()
         ifile >> tempBook._ISBN;
         ifile >> tempBook._leibie;
         ifile >> tempBook._gotime;
+        ifile >> tempBook._flagExist;
         vecbook.push_back(tempBook);
 
     }
@@ -57,11 +63,12 @@ void book::read()
 //添加
 int book::add(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibie, int setGotime)
 {
+    bookCEO.read();
     book tempBook;
 
     for (int i = 0; i < vecbook.size(); i++)
     {
-        if (setBookname == vecbook[i]._bookName)
+        if (setISBN == vecbook[i]._ISBN)
         {
             qDebug("该书籍已存在");
             return 0;
@@ -74,7 +81,7 @@ int book::add(string setBookname, string setZuozhe, string setCubanshe, string s
     tempBook._ISBN = setISBN;
     tempBook._leibie = setLeibie;
     tempBook._gotime = setGotime;
-
+    tempBook._flagExist = 1;
     vecbook.push_back(tempBook);
     bookCEO.save();
     qDebug("书籍添加成功");
@@ -82,7 +89,7 @@ int book::add(string setBookname, string setZuozhe, string setCubanshe, string s
 }
 
 //删除
-void book::del(string setISBN)
+int book::del(string setISBN)
 {
     bookCEO.read();
     vector<book>::iterator it;
@@ -96,31 +103,37 @@ void book::del(string setISBN)
             //删除该元素
             vecbook.erase(it);
             bookCEO.save();
+            return 1;
         }
     }
+
+    return 0;
 }
 
 //修改
-void book::xiugai(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime)
+int book::xiugai(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime,int setFlagexist)
 {
-    book tempUser;
-    tempUser._bookName = setBookname;
-    tempUser._zuozhe = setZuozhe;
-    tempUser._chubanshe = setCubanshe;
-    tempUser._ISBN = setISBN;
-    tempUser._leibie = setLeibei;
-    tempUser._gotime = setGotime;
+    book tempBook;
+    tempBook._bookName = setBookname;
+    tempBook._zuozhe = setZuozhe;
+    tempBook._chubanshe = setCubanshe;
+    tempBook._ISBN = setISBN;
+    tempBook._leibie = setLeibei;
+    tempBook._gotime = setGotime;
+    tempBook._flagExist=setFlagexist;
 
     for (int i = 0; i < vecbook.size(); i++)
     {
-        if (vecbook[i]._ISBN == tempUser._ISBN)
+        if (vecbook[i]._ISBN == tempBook._ISBN)
         {
 
-            vecbook[i] = tempUser;
+            vecbook[i] = tempBook;
             bookCEO.save();
+            return 1;
         }
     }
 
+    return 0;
 }
 
 
@@ -129,45 +142,21 @@ vector<int> book::sousuo(string sousuoci)
 {
     bookCEO.read();
     vector<int> result;
+
     for (int i = 0; i < vecbook.size(); i++)
     {
-        if (vecbook[i]._bookName==sousuoci)
+        if (sousuoci.empty())
         {
             result.push_back(i);
         }
 
     }
+    return result;
+
 
     for (int i = 0; i < vecbook.size(); i++)
     {
-        if (vecbook[i]._chubanshe == sousuoci)
-        {
-            result.push_back(i);
-        }
-
-    }
-
-    for (int i = 0; i < vecbook.size(); i++)
-    {
-        if (vecbook[i]._ISBN == sousuoci)
-        {
-            result.push_back(i);
-        }
-
-    }
-
-    for (int i = 0; i < vecbook.size(); i++)
-    {
-        if (vecbook[i]._leibie == sousuoci)
-        {
-            result.push_back(i);
-        }
-
-    }
-
-    for (int i = 0; i < vecbook.size(); i++)
-    {
-        if (vecbook[i]._zuozhe == sousuoci)
+        if (vecbook[i]._bookName==sousuoci||vecbook[i]._zuozhe==sousuoci||vecbook[i]._chubanshe==sousuoci||vecbook[i]._ISBN==sousuoci||vecbook[i]._leibie==sousuoci)
         {
             result.push_back(i);
         }

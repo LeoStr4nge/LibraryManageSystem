@@ -41,7 +41,7 @@ void FirstWindow::on_pushButton_clicked()
     string password = ui->lineEdit_2->text().toStdString();
     //检查用户输入的账号
     //管理员账号
-    if(account == "admin" && password == "000000") {
+    if(account == "a" && password == "0") {
         auto a = new adminPage;
         a->show();
         this->close();

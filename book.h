@@ -3,6 +3,7 @@
 #include<iostream>
 #include<QString>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 class book
@@ -13,8 +14,8 @@ public:
     void save();
     void read();
     int add(string setBookname,string setZuozhe,string setCubanshe,string setISBN,string setLeibei,int setGotime);
-    void del(string setISBN);
-    void xiugai(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime);
+    int del(string setISBN);
+    int xiugai(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime,int setFlagexist);
     vector<int> sousuo(string sousuoci);
     QString qBookname();
     QString qAuthor();
@@ -25,6 +26,7 @@ public:
 
 
 
+
 private:
     string _bookName;
     string _zuozhe;
@@ -32,7 +34,10 @@ private:
     string _ISBN;
     string _leibie;
     int _gotime;
+    int _flagExist=1;
 
 };
+
+
 
 #endif // BOOK_H

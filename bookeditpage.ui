@@ -100,6 +100,11 @@
        </column>
        <column>
         <property name="text">
+         <string>是否在馆</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
          <string>还书日期</string>
         </property>
        </column>

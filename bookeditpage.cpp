@@ -66,8 +66,9 @@ void bookEditPage::on_pushButton_4_clicked()
             string author = ui->tableWidget->model()->index(i,2).data().toString().toStdString();
             string publisher = ui->tableWidget->model()->index(i,3).data().toString().toStdString();
             string type = ui->tableWidget->model()->index(i,4).data().toString().toStdString();
-            int date = ui->tableWidget->model()->index(i,5).data().toInt();
-            bookCEO.xiugai(bookName,author,publisher,ISBN,type,date);
+            int flagExist = ui->tableWidget->model()->index(i,5).data().toInt();
+            int date = ui->tableWidget->model()->index(i,6).data().toInt();
+            bookCEO.xiugai(bookName,author,publisher,ISBN,type,date,flagExist);
     }
     DIALOGMSG = "修改成功";
     auto d = new Dialog;
