@@ -2,6 +2,7 @@
 #include "ui_newbookpage.h"
 #include "book.h"
 #include "dialog.h"
+#include "bookeditpage.h"
 
 extern vector<book> vecbook;
 extern book bookCEO;
@@ -33,6 +34,7 @@ void newBookPage::on_pushButton_clicked()
         auto d = new Dialog;
         d->show();
     }else{
+        //检查ISBN号格式
         int flag = 0;
         char temp = ISBN[1];
         if(temp != '-')
@@ -80,4 +82,11 @@ void newBookPage::on_lineEditISBN_returnPressed()
         QString temp = QString::fromStdString(ISBN);
         ui->lineEditISBN->setText(temp);
     }
+}
+
+void newBookPage::on_pushButton_2_clicked()
+{
+    auto b = new bookEditPage;
+    b->show();
+    this->close();
 }

@@ -50,16 +50,11 @@ void signUpPage::on_pushButton_2_clicked()
 void signUpPage::on_pushButton_clicked()
 {
     //获取信息
-    QString temp = ui->lineEdit->text();
-    std::string name = temp.toStdString();//姓名
-    temp = ui->lineEdit_2->text();
-    std::string studentID = temp.toStdString();//学号
-    temp = ui->lineEdit_3->text();
-    std::string phone = temp.toStdString();//手机号
-    temp = ui->lineEdit_4->text();
-    std::string tempPwd = temp.toStdString();
-    temp = ui->lineEdit_5->text();
-    std::string tempPwd2 = temp.toStdString();
+    std::string name = ui->lineEdit->text().toStdString();//姓名
+    std::string studentID = ui->lineEdit_2->text().toStdString();//学号
+    std::string phone = ui->lineEdit_3->text().toStdString();//手机号
+    std::string tempPwd = ui->lineEdit_4->text().toStdString();//密码1
+    std::string tempPwd2 = ui->lineEdit_5->text().toStdString();//确认密码
     //检查有无空白输入
     if(name.empty()||studentID.empty()||phone.empty()||tempPwd.empty()||tempPwd2.empty()){
         DIALOGMSG = "请完整填写";

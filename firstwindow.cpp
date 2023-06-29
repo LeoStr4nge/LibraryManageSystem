@@ -37,14 +37,12 @@ FirstWindow::~FirstWindow()
 //登录按钮
 void FirstWindow::on_pushButton_clicked()
 {
-    QString temp =  ui->lineEdit->text();
-    string account = temp.toStdString();
-    temp = ui->lineEdit_2->text();
-    string password = temp.toStdString();
+    string account = ui->lineEdit->text().toStdString();
+    string password = ui->lineEdit_2->text().toStdString();
     //检查用户输入的账号
     //管理员账号
     if(account == "admin" && password == "000000") {
-        adminPage *a = new adminPage;
+        auto a = new adminPage;
         a->show();
         this->close();
     }else{
@@ -77,7 +75,7 @@ void FirstWindow::on_pushButton_clicked()
 //注册按钮
 void FirstWindow::on_pushButton_2_clicked()
 {
-    signUpPage *s = new signUpPage;
+    auto s = new signUpPage;
     s->show();
     this->close();
 }

@@ -27,8 +27,7 @@ userCenter::userCenter(QWidget *parent) :
     QValidator *validator4 = new QRegExpValidator(regx3,ui->lineEdit_2);
     ui->lineEdit_2->setValidator(validator4);
     ui->lineEdit_3->setValidator(validator4);
-    //获取CEO中的信息
-
+    //获取CEO中的信息并加载到页面中
     QString crtName = CEO.qName();
     QString crtPhone = CEO.qPhone();
     QString crtID = CEO.qStudentID();
@@ -44,7 +43,7 @@ userCenter::~userCenter()
 
 void userCenter::on_pushButton_clicked()
 {
-    userPage *u = new userPage;
+    auto u = new userPage;
     u->show();
     this->close();
 
@@ -92,7 +91,7 @@ void userCenter::on_pushButton_2_clicked()
 void userCenter::on_pushButton_3_clicked()
 {
     CEO.zhuxiao();
-    FirstWindow *f = new FirstWindow;
+    auto f = new FirstWindow;
     f->show();
     this->close();
 }

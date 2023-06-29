@@ -20,6 +20,8 @@ private slots:
 
     void on_lineEditISBN_returnPressed();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::newBookPage *ui;
 };
