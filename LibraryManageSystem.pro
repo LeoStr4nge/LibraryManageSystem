@@ -19,6 +19,7 @@ SOURCES += \
     adminpage.cpp \
     book.cpp \
     bookeditpage.cpp \
+    date.cpp \
     dialog.cpp \
     main.cpp \
     firstwindow.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     adminpage.h \
     book.h \
     bookeditpage.h \
+    date.h \
     dialog.h \
     errors.h \
     firstwindow.h \
