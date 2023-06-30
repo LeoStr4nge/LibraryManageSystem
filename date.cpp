@@ -22,7 +22,7 @@ Date::Date(int y, int m, int d)
     year = y; month = m; day = d;
 }
 
-
+//重载+号运算符
 Date Date::operator+(int days)
 {
     days += md2d(leap(year), month, day);
@@ -50,12 +50,10 @@ Date Date::operator+(int days)
     return dt;
 }
 
-void add(int day)
+int add(int day)
 {
 
     Date d1(2003,3,23);
-    cout << "加上天数";
-
     Date d2 = d1 + day;
-    cout <<  d2.day<< endl;
+    return d2.day;
 }

@@ -6,7 +6,7 @@ class Date
 {
 public:
     Date(int y, int m, int d);
-    friend void add();
+    friend int add(int day);
     int year;
     int month;
     int day;
@@ -16,7 +16,6 @@ public:
     //某日期加上天数
     Date operator+(int days);
 private:
-
     int y2d(int year)
     {
         return 365 + leap(year);
