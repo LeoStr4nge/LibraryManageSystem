@@ -42,9 +42,11 @@ void searchPage::on_lineEdit_returnPressed()
 //搜索按钮
 void searchPage::on_pushButton_clicked()
 {
+    //清空表格
+    ui->tableWidget->setRowCount(0);
+    //搜索
     string s = ui->lineEditSearch->text().toStdString();
     vector<int> searchResult = bookCEO.sousuo(s);
-    //ui->tableWidget->setColumnCount(result.size());
     for(int i = 0;i < searchResult.size();i++){
         int row = ui->tableWidget->rowCount();
         ui->tableWidget->insertRow(row);
@@ -57,10 +59,10 @@ void searchPage::on_pushButton_clicked()
         //ui->tableWidget->setItem(row,5,new QTableWidgetItem(vecbook[searchResult[i]].qAuthor()));
     }
 }
-
+//借阅
 void searchPage::on_pushButton_3_clicked()
 {
     int bookID = ui->lineEditBorrow->text().toInt();
     string value = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();
-    //需要一个接收书码并返回1/0/-1表示是否借书成功/该书已被借阅的借阅函数
+    //需要一个接收书码并返回1/0表示是否借书成功/该书已被借阅的借阅函数
 }

@@ -26,6 +26,8 @@ private slots:
 
     void on_lineEdit_returnPressed();
 
+    void on_pushButton_5_clicked();
+
 private:
     Ui::bookEditPage *ui;
 };

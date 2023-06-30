@@ -25,6 +25,7 @@ SOURCES += \
     newbookpage.cpp \
     searchpage.cpp \
     signuppage.cpp \
+    unreturnbookspage.cpp \
     user.cpp \
     usercenter.cpp \
     userpage.cpp
@@ -39,6 +40,7 @@ HEADERS += \
     newbookpage.h \
     searchpage.h \
     signuppage.h \
+    unreturnbookspage.h \
     user.h \
     usercenter.h \
     userpage.h
@@ -51,6 +53,7 @@ FORMS += \
     newbookpage.ui \
     searchpage.ui \
     signuppage.ui \
+    unreturnbookspage.ui \
     usercenter.ui \
     userpage.ui
 

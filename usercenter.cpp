@@ -5,6 +5,7 @@
 #include "user.h"
 #include "firstwindow.h"
 #include "dialog.h"
+#include "unreturnbookspage.h"
 extern User CEO;
 extern QString DIALOGMSG;
 
@@ -87,11 +88,18 @@ void userCenter::on_pushButton_2_clicked()
     }
 
 }
-
+//注销
 void userCenter::on_pushButton_3_clicked()
 {
     CEO.zhuxiao();
     auto f = new FirstWindow;
     f->show();
+    this->close();
+}
+//待还书籍
+void userCenter::on_pushButton_4_clicked()
+{
+    auto u = new unreturnBooksPage;
+    u->show();
     this->close();
 }

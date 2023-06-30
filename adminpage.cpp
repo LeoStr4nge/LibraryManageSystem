@@ -13,10 +13,15 @@ adminPage::~adminPage()
 {
     delete ui;
 }
-
+//书籍管理
 void adminPage::on_pushButton_clicked()
 {
     bookEditPage *b = new bookEditPage;
     b->show();
     this->close();
+}
+//用户管理
+void adminPage::on_pushButton_2_clicked()
+{
+
 }
