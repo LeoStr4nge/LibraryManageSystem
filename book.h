@@ -23,9 +23,8 @@ public:
     QString qISBN();
     QString qType();
     int qGotime();
-
-
-
+    QString isExist();
+    int exactSearch(string sousuoci);
 
 private:
     string _bookName;

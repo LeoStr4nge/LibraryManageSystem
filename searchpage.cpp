@@ -4,10 +4,16 @@
 #include <string>
 #include "book.h"
 #include "dialog.h"
+#include "borrow.h"
+#include "user.h"
+#include "date.h"
 
 extern vector<book> vecbook;
 extern book bookCEO;
 extern QString DIALOGMSG;
+extern vector<borrow>vecbor;
+extern borrow borCEO;
+extern User CEO;
 
 searchPage::searchPage(QWidget *parent) :
     QWidget(parent),
@@ -55,14 +61,26 @@ void searchPage::on_pushButton_clicked()
         ui->tableWidget->setItem(row,2,new QTableWidgetItem(vecbook[searchResult[i]].qAuthor()));
         ui->tableWidget->setItem(row,3,new QTableWidgetItem(vecbook[searchResult[i]].qPublisher()));
         ui->tableWidget->setItem(row,4,new QTableWidgetItem(vecbook[searchResult[i]].qType()));
-        //暂时还没有还书时间可供显示
-        //ui->tableWidget->setItem(row,5,new QTableWidgetItem(vecbook[searchResult[i]].qAuthor()));
+        ui->tableWidget->setItem(row,5,new QTableWidgetItem(vecbook[searchResult[i]].isExist()));
     }
 }
 //借阅
 void searchPage::on_pushButton_3_clicked()
 {
     int bookID = ui->lineEditBorrow->text().toInt();
-    string value = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();
-    //需要一个接收书码并返回1/0表示是否借书成功/该书已被借阅的借阅函数
+    string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();
+    string name = CEO.qName().toStdString();
+    Date now;
+    int Days = ui->comboBox->currentText().toUInt();
+    int flag = borCEO.jieshu(name,ISBN,now,Days);
+    if(flag == 0){
+        DIALOGMSG = "该书已被借出";
+    }
+    else if(flag == 1){
+        DIALOGMSG = "借阅成功";
+    }else{
+        DIALOGMSG = "借书失败";
+    }
+    auto d = new Dialog;
+    d->show();
 }

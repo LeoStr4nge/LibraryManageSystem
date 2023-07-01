@@ -138,6 +138,9 @@
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
      </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <column>
       <property name="text">
        <string>书名</string>
@@ -168,11 +171,6 @@
        <string>是否在馆</string>
       </property>
      </column>
-     <column>
-      <property name="text">
-       <string>还书日期</string>
-      </property>
-     </column>
     </widget>
    </item>
    <item row="2" column="0">
@@ -181,6 +179,39 @@
       <widget class="QLineEdit" name="lineEditBorrow">
        <property name="placeholderText">
         <string>请输入书籍序号</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>借阅时长：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox">
+       <item>
+        <property name="text">
+         <string>30</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>60</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>90</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>天</string>
        </property>
       </widget>
      </item>

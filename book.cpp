@@ -175,4 +175,29 @@ QString book::qPublisher(){return QString::fromStdString(_chubanshe);};
 QString book::qISBN(){return QString::fromStdString(_ISBN);};
 QString book::qType(){return QString::fromStdString(_leibie);};
 int book::qGotime(){return _gotime;};
+QString book::isExist(){
+    QString result;
+    if(this->_flagExist == 1){
+        result = "是";
+        return result;
+    }
+    else{
+        result = "否";
+        return result;
+    }
+}
 
+//根据ISBN精确找到一本书的序号，用于搭配borrow类使用
+int book::exactSearch(string sousuoci)
+{
+    bookCEO.read();
+    int result;
+    for (int i = 0; i < vecbook.size(); i++)
+    {
+        if (vecbook[i]._ISBN==sousuoci)
+        {
+            result = i;
+        }
+    }
+    return result;
+}

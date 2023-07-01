@@ -112,17 +112,17 @@ int borrow::huanshu(string setReader,string setISBN,Date d)
     }
 }
 
-vector<int> borrow::gerenjieshuxinxi(string setReader)
+vector<string> borrow::gerenjieshuxinxi(string setReader)
 {
     borCEO.read();
-    vector<int> result;
+    vector<string> result;
 
 
     for (int i = 0; i < vecbor.size(); i++)
     {
         if (vecbor[i]._reader==setReader)
         {
-            result.push_back(i);
+            result.push_back(vecbor[i]._readerISBN);
         }
 
     }
