@@ -5,6 +5,7 @@
 #include "date.h"
 #include "borrow.h"
 #include "user.h"
+#include "dialog.h"
 
 extern vector<book> vecbook;
 extern book bookCEO;
@@ -25,7 +26,7 @@ unreturnBooksPage::unreturnBooksPage(QWidget *parent) :
     QValidator *validator = new QRegExpValidator(regx,ui->lineEdit);
     ui->lineEdit->setValidator(validator);
     //显示未归还的图书
-    string name = CEO.qName().toStdString();
+    string name = CEO.qName().toStdString();//用户名
     vector<string> temp = borCEO.gerenjieshuxinxi(name);
     vector<int> unreturnedBooks;
     for (int i = 0;i < temp.size();i++) {
@@ -63,18 +64,32 @@ void unreturnBooksPage::on_pushButton_clicked()
     std::string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();//得到目标图书的ISBN
     string name = CEO.qName().toStdString();//名字
     Date nowday;
-    borCEO.huanshu(name,ISBN,nowday);
-
+    int flag = borCEO.huanshu(name,ISBN,nowday);
+    if(flag == 1){
+        DIALOGMSG = "还书成功";
+    }else{
+        DIALOGMSG = "还书失败";
+    }
+    auto d = new Dialog;
+    d->show();
 }
 //一键归还
 void unreturnBooksPage::on_pushButton_2_clicked()
 {
     int row = ui->tableWidget->rowCount();
+    int flag;
     for(int i = 0;i < row;i++){
         std::string ISBN = ui->tableWidget->model()->index(i,1).data().toString().toStdString();
         //需要一个根据ISBN号归还图书，并返回1/0表示是否归还成功的函数
         string name = CEO.qName().toStdString();//名字
         Date nowday;
-        borCEO.huanshu(name,ISBN,nowday);
+        flag = borCEO.huanshu(name,ISBN,nowday);
     }
+    if(flag == 1){
+        DIALOGMSG = "还书成功";
+    }else{
+        DIALOGMSG = "还书失败";
+    }
+    auto d = new Dialog;
+    d->show();
 }

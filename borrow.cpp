@@ -124,5 +124,20 @@ vector<string> borrow::gerenjieshuxinxi(string setReader)
     return result;
 }
 
+vector<int> borrow::getBorrowID(string setReader)
+{
+    borCEO.read();
+    vector<int> result;
+    for (int i = 0; i < vecbor.size(); i++)
+    {
+        if (vecbor[i]._reader==setReader)
+        {
+            result.push_back(i);
+        }
+
+    }
+    return result;
+}
+
 
 

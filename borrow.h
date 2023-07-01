@@ -29,7 +29,7 @@ public:
     void save();//保存
     void read();//读取 //读取以后存在vecbor里，管理员直接调取vecbor可以看全部的借书
     vector<string> gerenjieshuxinxi(string setReader);
-
+    vector<int> getBorrowID(string setReader);
 
 private:
     string _reader;
