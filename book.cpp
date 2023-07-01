@@ -142,14 +142,15 @@ vector<int> book::sousuo(string sousuoci)
     bookCEO.read();
     vector<int> result;
 
-    for (int i = 0; i < vecbook.size(); i++)
+    if (sousuoci.empty())
     {
-        if (sousuoci.empty())
+        for (int i = 0; i < vecbook.size(); i++)
         {
             result.push_back(i);
-            return result;
+
         }
 
+        return result;
     }
 
 

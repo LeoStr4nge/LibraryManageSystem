@@ -11,7 +11,7 @@ private:
     string _password;//密码
     string _xuehao;//学号
     string _xingming;//姓名
-
+    friend class borrow;
 
 public:
     User() {};

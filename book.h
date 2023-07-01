@@ -35,7 +35,7 @@ private:
     string _leibie;
     int _gotime;
     int _flagExist=1;
-
+    friend class borrow;
 };
 
 

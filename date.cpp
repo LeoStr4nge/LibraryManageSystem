@@ -1,5 +1,11 @@
 #include "date.h"
 
+time_t now=time(0);
+tm* ltm = localtime(&now);
+int _nowYear=1900 + ltm->tm_year;
+int _nowMonth=1 + ltm->tm_mon;
+int _nowDay=ltm->tm_mday;
+
 const int day_tab[2][12] = { {31,28,31,30,31,30,31,31,30,31,30,31},
     {31,29,31,30,31,30,31,31,30,31,30,31} };
 
@@ -50,10 +56,10 @@ Date Date::operator+(int days)
     return dt;
 }
 
-int add(int day)
+int add(Date d1,int day)
 {
 
-    Date d1(2003,3,23);
+
     Date d2 = d1 + day;
     return d2.day;
 }
