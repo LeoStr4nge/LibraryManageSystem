@@ -2,6 +2,7 @@
 #include "ui_adminpage.h"
 #include "bookeditpage.h"
 #include "statisticspage.h"
+#include "firstwindow.h"
 
 adminPage::adminPage(QWidget *parent) :
     QWidget(parent),
@@ -21,10 +22,12 @@ void adminPage::on_pushButton_clicked()
     b->show();
     this->close();
 }
-//用户管理
+//退出登录
 void adminPage::on_pushButton_2_clicked()
 {
-
+    auto f = new FirstWindow;
+    f->show();
+    this->close();
 }
 //统计页面
 void adminPage::on_pushButton_3_clicked()

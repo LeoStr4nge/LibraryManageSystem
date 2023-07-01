@@ -70,6 +70,8 @@ void unreturnBooksPage::on_pushButton_clicked()
     string name = CEO.qName().toStdString();//名字
     Date nowday;
     int flag = borCEO.huanshu(name,ISBN,nowday);
+    auto u = new unreturnBooksPage;//刷新页面
+    u->show();
     if(flag == 1){
         DIALOGMSG = "还书成功";
     }else{
@@ -77,6 +79,7 @@ void unreturnBooksPage::on_pushButton_clicked()
     }
     auto d = new Dialog;
     d->show();
+    this->close();
 }
 //一键归还
 void unreturnBooksPage::on_pushButton_2_clicked()
@@ -88,6 +91,8 @@ void unreturnBooksPage::on_pushButton_2_clicked()
         string name = CEO.qName().toStdString();//名字
         Date nowday;
         flag = borCEO.huanshu(name,ISBN,nowday);
+        auto u = new unreturnBooksPage;//刷新页面
+        u->show();
     }
     if(flag == 1){
         DIALOGMSG = "还书成功";
@@ -96,6 +101,7 @@ void unreturnBooksPage::on_pushButton_2_clicked()
     }
     auto d = new Dialog;
     d->show();
+    this->close();
 }
 
 void unreturnBooksPage::on_pushButton_4_clicked()
@@ -104,6 +110,8 @@ void unreturnBooksPage::on_pushButton_4_clicked()
     std::string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();//得到目标图书的ISBN
     int days = ui->comboBox->currentText().toInt();
     int flag = borCEO.xvjie(ISBN,days);
+    auto u = new unreturnBooksPage;//刷新页面
+    u->show();
     if(flag == 1){
         DIALOGMSG = "续借成功";
     }else{
@@ -111,4 +119,5 @@ void unreturnBooksPage::on_pushButton_4_clicked()
     }
     auto d = new Dialog;
     d->show();
+    this->close();
 }

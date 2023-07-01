@@ -16,13 +16,31 @@ statisticsPage::statisticsPage(QWidget *parent) :
     ui(new Ui::statisticsPage)
 {
     ui->setupUi(this);
+    //读入数据
+    borCEO.read();
     //禁止用户编辑表格
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    vector<string> bookname = borCEO.getBookname();
+    vector<string> readername = borCEO.getReader();
+    vector<string> borrowDate = borCEO.getJieshuday();
+    vector<string> returnDate = borCEO.getHuanshuday();
     for(int i = 0;i < vecbor.size();i++){
         int row = ui->tableWidget->rowCount();
         ui->tableWidget->insertRow(row);
-        ui->tableWidget->setItem(row,0,new QTableWidgetItem());//未完成，需要一个返回string数组类型用户名，书名以及借阅时间，归还时间的函数
+        ui->tableWidget->setItem(row,0,new QTableWidgetItem(QString::fromStdString(bookname[i])));
+        ui->tableWidget->setItem(row,1,new QTableWidgetItem(QString::fromStdString(readername[i])));
+        ui->tableWidget->setItem(row,2,new QTableWidgetItem(QString::fromStdString(borrowDate[i])));
+        ui->tableWidget->setItem(row,3,new QTableWidgetItem(QString::fromStdString(returnDate[i])));
     }
+    int borrowCount = borCEO.getJienum();
+    QString temp = ui->labelBorrowed->text();
+    temp += QString::number(borrowCount);
+    ui->labelBorrowed->setText(temp);
+    temp = ui->labelInLibrary->text();
+    int inLibrary = vecbook.size();
+    inLibrary -= borrowCount;
+    temp += QString::number(inLibrary);
+    ui->labelInLibrary->setText(temp);
 }
 
 statisticsPage::~statisticsPage()

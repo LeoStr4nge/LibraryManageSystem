@@ -5,10 +5,13 @@
 #include <vector>
 #include "book.h"
 #include "dialog.h"
+#include "borrow.h"
 
 extern std::vector<book> vecbook;
 extern book bookCEO;
 extern QString DIALOGMSG;
+extern vector<borrow>vecbor;
+extern borrow borCEO;
 
 bookEditPage::bookEditPage(QWidget *parent) :
     QWidget(parent),
@@ -54,8 +57,10 @@ void bookEditPage::on_pushButton_clicked()
         ui->tableWidget->setItem(row,2,new QTableWidgetItem(vecbook[searchResult[i]].qAuthor()));
         ui->tableWidget->setItem(row,3,new QTableWidgetItem(vecbook[searchResult[i]].qPublisher()));
         ui->tableWidget->setItem(row,4,new QTableWidgetItem(vecbook[searchResult[i]].qType()));
-        //还差一个还书日期没写
-        //ui->tableWidget->setItem(row,5,new QTableWidgetItem(vecbook[result[i]].qAuthor()));
+        ui->tableWidget->setItem(row,5,new QTableWidgetItem(vecbook[searchResult[i]].isExist()));
+        string ISBN = vecbook[searchResult[i]].qISBN().toStdString();
+        string returnDate = borCEO.haveISBN2huanshuday(ISBN);
+        ui->tableWidget->setItem(row,6,new QTableWidgetItem(QString::fromStdString(returnDate)));
     }
     int row = ui->tableWidget->rowCount();
 }
@@ -75,6 +80,7 @@ void bookEditPage::on_pushButton_4_clicked()
             bookCEO.xiugai(bookName,author,publisher,ISBN,type,date,flagExist);
     }
     DIALOGMSG = "修改成功";
+    ui->pushButton->click();
     auto d = new Dialog;
     d->show();
 }
@@ -89,6 +95,7 @@ void bookEditPage::on_pushButton_5_clicked()
     int bookID = ui->lineEditBookID->text().toInt();
     string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();
     int flag = bookCEO.del(ISBN);
+    ui->pushButton->click();
     if(flag == 1){
         DIALOGMSG = "删除成功";
         auto d = new Dialog;

@@ -73,6 +73,7 @@ void searchPage::on_pushButton_3_clicked()
     Date now;
     int Days = ui->comboBox->currentText().toUInt();
     int flag = borCEO.jieshu(name,ISBN,now,Days);
+    ui->pushButton->click();
     if(flag == 0){
         DIALOGMSG = "该书已被借出";
     }

@@ -58,7 +58,7 @@ int borrow::jieshu(string setReader,string setISBN,Date d,int jieyueshijian)
             {
                 tempBor._reader=setReader;
                 tempBor._readerISBN=setISBN;
-                tempBor._shu.y=d.day;
+                tempBor._shu.y=d.year;
                 tempBor._shu.m=d.month;
                 tempBor._shu.d=d.day;
                 tempBor._shu.jieyuetime=jieyueshijian;
@@ -163,7 +163,7 @@ vector<int> borrow::getBorrowID(string setReader)
 Date borrow::huanshuriqi(Date jieshuday,int jieyueshijian)
 {
     Date huanshuday;
-    huanshuday=huanshuday+jieyueshijian;
+    huanshuday = jieshuday + jieyueshijian;
     return huanshuday;
 }
 
@@ -254,6 +254,7 @@ int getAllnum()
 //根据ISBN获取借书日期
 string borrow::haveISBN2jieshuday(string setISBN)
 {
+    borCEO.read();
     Date d1,d2;
     string a;
     for(int i=0;i<vecbor.size();i++)
@@ -272,6 +273,7 @@ string borrow::haveISBN2jieshuday(string setISBN)
 //根据ISBN获取还书日期
 string borrow::haveISBN2huanshuday(string setISBN)
 {
+    borCEO.read();
     Date d1,d2;
     string a;
     for(int i=0;i<vecbor.size();i++)
