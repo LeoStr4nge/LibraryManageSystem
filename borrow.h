@@ -9,6 +9,8 @@ using namespace std;
 
 extern vector<User>vecuser;
 extern vector<book>vecbook;
+extern book bookCEO;
+extern User CEO;
 
 
 struct jie

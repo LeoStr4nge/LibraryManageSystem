@@ -61,7 +61,10 @@ void unreturnBooksPage::on_pushButton_clicked()
 {
     int bookID = ui->lineEdit->text().toInt();
     std::string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();//得到目标图书的ISBN
-    //需要一个根据ISBN号归还图书，并返回1/0表示是否归还成功的函数
+    string name = CEO.qName().toStdString();//名字
+    Date nowday;
+    borCEO.huanshu(name,ISBN,nowday);
+
 }
 //一键归还
 void unreturnBooksPage::on_pushButton_2_clicked()
@@ -70,5 +73,8 @@ void unreturnBooksPage::on_pushButton_2_clicked()
     for(int i = 0;i < row;i++){
         std::string ISBN = ui->tableWidget->model()->index(i,1).data().toString().toStdString();
         //需要一个根据ISBN号归还图书，并返回1/0表示是否归还成功的函数
+        string name = CEO.qName().toStdString();//名字
+        Date nowday;
+        borCEO.huanshu(name,ISBN,nowday);
     }
 }

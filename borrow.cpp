@@ -4,6 +4,7 @@
 vector<borrow>vecbor;
 borrow borCEO;
 
+
 void borrow::save()
 {
     ofstream ofile;
@@ -11,7 +12,7 @@ void borrow::save()
 
     for (int i = 0; i < vecbor.size(); i++)
     {
-        ofile << vecbor[i]._reader << endl;
+        ofile <<vecbor[i]._reader << endl;
         ofile <<vecbor[i]._readerISBN<<endl;
         ofile <<vecbor[i]._shu.y<< endl;
         ofile <<vecbor[i]._shu.m<< endl;
@@ -63,7 +64,7 @@ int borrow::jieshu(string setReader,string setISBN,Date d,int jieyueshijian)
                 tempBor._shu.jieyuetime=jieyueshijian;
                 vecbor.push_back(tempBor);
                 vecbook[i]._flagExist=0;
-
+                bookCEO.save();
                 qDebug("借书成功");
                 borCEO.save();
                 return 1;
@@ -72,11 +73,8 @@ int borrow::jieshu(string setReader,string setISBN,Date d,int jieyueshijian)
                 qDebug("该书已被借出，不在馆内");
                 return 0;
             }
-        }else
-        {
-            qDebug("借书失败");
-            return -1;
         }
+
     }
 
 
@@ -101,13 +99,9 @@ int borrow::huanshu(string setReader,string setISBN,Date d)
             }
             vecbor.erase(it);
             borCEO.save();
-
+            bookCEO.save();
             qDebug("还书成功");
             return 1;
-        }else
-        {
-            qDebug("还书失败");
-            return 0;
         }
     }
 }
