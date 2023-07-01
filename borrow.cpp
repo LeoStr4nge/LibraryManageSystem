@@ -124,5 +124,41 @@ vector<string> borrow::gerenjieshuxinxi(string setReader)
     return result;
 }
 
+int borrow::xvjie(string setISBN,int xvjieshijian)
+{
+    borCEO.read();
+    for(int i=0;i<vecbor.size();i++)
+    {
+        if(setISBN==vecbor[i]._readerISBN)
+        {
+            vecbor[i]._shu.jieyuetime+=xvjieshijian;
+            borCEO.save();
+            qDebug("续借成功");
+            return 1;
+        }
+
+    }
+    qDebug("续借失败，未找到图书");
+    return 0;
+
+}
 
 
+//计算还书日期
+Date borrow::huanshuriqi(Date jieshuday,int jieyueshijian)
+{
+    Date huanshuday;
+    huanshuday=huanshuday+jieyueshijian;
+    return huanshuday;
+}
+
+//获取借书日期类
+Date borrow::jieshuriqi(borrow x)
+{
+    Date jieshuday;
+    jieshuday.year=x._shu.y;
+    jieshuday.month=x._shu.m;
+    jieshuday.day=x._shu.d;
+    return jieshuday;
+
+}
