@@ -1,6 +1,7 @@
 #include "adminpage.h"
 #include "ui_adminpage.h"
 #include "bookeditpage.h"
+#include "statisticspage.h"
 
 adminPage::adminPage(QWidget *parent) :
     QWidget(parent),
@@ -24,4 +25,11 @@ void adminPage::on_pushButton_clicked()
 void adminPage::on_pushButton_2_clicked()
 {
 
+}
+//统计页面
+void adminPage::on_pushButton_3_clicked()
+{
+    auto s = new statisticsPage;
+    s->show();
+    this->close();
 }
