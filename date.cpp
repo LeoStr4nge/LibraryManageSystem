@@ -58,8 +58,6 @@ Date Date::operator+(int days)
 
 int add(Date d1,int day)
 {
-
-
     Date d2 = d1 + day;
     return d2.day;
 }

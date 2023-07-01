@@ -32,6 +32,7 @@ public:
     int xvjie(string setISBN,int xvjieshijian);
     Date huanshuriqi(Date jieshuday,int jieyueshijian);
     Date jieshuriqi(borrow x);
+    vector<int> getBorrowID(string setReader);
 
 private:
     string _reader;

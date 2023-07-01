@@ -143,6 +143,21 @@ int borrow::xvjie(string setISBN,int xvjieshijian)
 
 }
 
+vector<int> borrow::getBorrowID(string setReader)
+{
+    borCEO.read();
+    vector<int> result;
+    for (int i = 0; i < vecbor.size(); i++)
+    {
+        if (vecbor[i]._reader==setReader)
+        {
+            result.push_back(i);
+        }
+
+    }
+    return result;
+}
+
 
 //计算还书日期
 Date borrow::huanshuriqi(Date jieshuday,int jieyueshijian)
