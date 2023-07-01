@@ -182,3 +182,108 @@ Date borrow::jieshuriqi(borrow x)
 int borrow::getBorrowTime(){
     return this->_shu.jieyuetime;
 }
+
+
+//获取全借书人
+vector<string> borrow::getReader()
+{
+    vector<string> readerName;
+    for(int i=0;i<vecbor.size();i++)
+    {
+        readerName.push_back(vecbor[i]._reader);
+    }
+    return readerName;
+}
+
+//获取全书名
+vector<string> borrow::getBookname()
+{
+    vector<string> temp;
+    for(int i=0;i<vecbor.size();i++)
+    {
+        int j;
+        j=bookCEO.exactSearch(vecbor[i]._readerISBN);
+        temp.push_back(vecbook[j]._bookName);
+    }
+    return temp;
+}
+
+
+//获取全借书日期
+
+vector<string> borrow::getJieshuday()
+{
+    vector<string> temp;
+    string a;
+    for(int i=0;i<vecbor.size();i++)
+    {
+        a=to_string(vecbor[i]._shu.y)+"年"+to_string(vecbor[i]._shu.m)+"月"+to_string(vecbor[i]._shu.d)+"日";
+        temp.push_back(a);
+    }
+    return temp;
+}
+
+//获取全还书日期
+vector<string> borrow::getHuanshuday()
+{
+    vector<string> temp;
+    Date d1,d2;
+    string a;
+    for(int i=0;i<vecbor.size();i++)
+    {
+        d1.day=vecbor[i]._shu.d;
+        d1.month=vecbor[i]._shu.m;
+        d1.year=vecbor[i]._shu.y;
+        d2=d1+vecbor[i]._shu.jieyuetime;
+        a=to_string(d2.year)+"年"+to_string(d2.month)+"月"+to_string(d2.day)+"日";
+        temp.push_back(a);
+    }
+    return temp;
+}
+//获取借阅数
+int borrow::getJienum()
+{
+    return vecbor.size();
+}
+//获取总图书数
+int getAllnum()
+{
+    return vecbook.size();
+}
+
+//根据ISBN获取借书日期
+string borrow::haveISBN2jieshuday(string setISBN)
+{
+    Date d1,d2;
+    string a;
+    for(int i=0;i<vecbor.size();i++)
+    {
+        if(setISBN==vecbor[i]._readerISBN)
+        {
+            d1.day=vecbor[i]._shu.d;
+            d1.month=vecbor[i]._shu.m;
+            d1.year=vecbor[i]._shu.y;
+            a=to_string(d1.year)+"年"+to_string(d1.month)+"月"+to_string(d1.day)+"日";
+            return a;
+        }
+    }
+}
+
+//根据ISBN获取还书日期
+string borrow::haveISBN2huanshuday(string setISBN)
+{
+    Date d1,d2;
+    string a;
+    for(int i=0;i<vecbor.size();i++)
+    {
+        if(setISBN==vecbor[i]._readerISBN)
+        {
+            d1.day=vecbor[i]._shu.d;
+            d1.month=vecbor[i]._shu.m;
+            d1.year=vecbor[i]._shu.y;
+            d2=d1+vecbor[i]._shu.jieyuetime;
+            a=to_string(d2.year)+"年"+to_string(d2.month)+"月"+to_string(d2.day)+"日";
+            return a;
+        }
+    }
+}

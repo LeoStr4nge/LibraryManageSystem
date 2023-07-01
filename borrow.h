@@ -34,11 +34,23 @@ public:
     Date jieshuriqi(borrow x);
     vector<int> getBorrowID(string setReader);
     int getBorrowTime();
+
+    vector<string> getReader();//获取全部读者
+    vector<string> getBookname();//获取全部书名
+    vector<string> getJieshuday();//获取全部借书日期
+    vector<string> getHuanshuday();//获取全部还书日期
+
+    int getJienum();//获取借阅数
+    int getAllnum();//获取总图书数
+    string haveISBN2jieshuday(string setISBN);//根据ISBN获取借书日期
+    string haveISBN2huanshuday(string setISBN);//根据ISBN获取还书日期
+
 private:
     string _reader;
     string _readerISBN;
     jie _shu;
-    friend class ui;
+
+
 };
 
 #endif // BORROW_H
