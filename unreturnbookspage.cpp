@@ -29,6 +29,7 @@ unreturnBooksPage::unreturnBooksPage(QWidget *parent) :
     string name = CEO.qName().toStdString();//用户名
     vector<string> temp = borCEO.gerenjieshuxinxi(name);
     vector<int> unreturnedBooks;
+    vector<int> borrowID = borCEO.getBorrowID(name);
     for (int i = 0;i < temp.size();i++) {
         int bookID = bookCEO.exactSearch(temp[i]);
        unreturnedBooks.push_back(bookID);
@@ -41,8 +42,12 @@ unreturnBooksPage::unreturnBooksPage(QWidget *parent) :
         ui->tableWidget->setItem(row,2,new QTableWidgetItem(vecbook[unreturnedBooks[i]].qAuthor()));
         ui->tableWidget->setItem(row,3,new QTableWidgetItem(vecbook[unreturnedBooks[i]].qPublisher()));
         ui->tableWidget->setItem(row,4,new QTableWidgetItem(vecbook[unreturnedBooks[i]].qType()));
-        //暂时没有还书日期可以显示
-        //ui->tableWidget->setItem(row,5,new QTableWidgetItem());
+        //计算还书日期
+        auto borrowDate = borCEO.jieshuriqi(vecbor[borrowID[i]]);//获取借书日期
+        auto borrowTime = vecbor[borrowID[i]].getBorrowTime();//获取借书时间
+        Date returnDate = borCEO.huanshuriqi(borrowDate,borrowTime);//计算还书日期
+        QString qReturnDate = QString::number(returnDate.year) + "年" + QString::number(returnDate.month) + "月" + QString::number(returnDate.day) + "日";//转换成Qt字符串
+        ui->tableWidget->setItem(row,5,new QTableWidgetItem(qReturnDate));
     }
 }
 
@@ -80,7 +85,6 @@ void unreturnBooksPage::on_pushButton_2_clicked()
     int flag;
     for(int i = 0;i < row;i++){
         std::string ISBN = ui->tableWidget->model()->index(i,1).data().toString().toStdString();
-        //需要一个根据ISBN号归还图书，并返回1/0表示是否归还成功的函数
         string name = CEO.qName().toStdString();//名字
         Date nowday;
         flag = borCEO.huanshu(name,ISBN,nowday);
@@ -89,6 +93,21 @@ void unreturnBooksPage::on_pushButton_2_clicked()
         DIALOGMSG = "还书成功";
     }else{
         DIALOGMSG = "还书失败";
+    }
+    auto d = new Dialog;
+    d->show();
+}
+
+void unreturnBooksPage::on_pushButton_4_clicked()
+{
+    int bookID = ui->lineEdit->text().toInt();
+    std::string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();//得到目标图书的ISBN
+    int days = ui->comboBox->currentText().toInt();
+    int flag = borCEO.xvjie(ISBN,days);
+    if(flag == 1){
+        DIALOGMSG = "续借成功";
+    }else{
+        DIALOGMSG = "续借失败";
     }
     auto d = new Dialog;
     d->show();

@@ -177,3 +177,8 @@ Date borrow::jieshuriqi(borrow x)
     return jieshuday;
 
 }
+
+//获取借书时间
+int borrow::getBorrowTime(){
+    return this->_shu.jieyuetime;
+}
