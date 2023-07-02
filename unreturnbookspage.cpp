@@ -91,9 +91,9 @@ void unreturnBooksPage::on_pushButton_2_clicked()
         string name = CEO.qName().toStdString();//名字
         Date nowday;
         flag = borCEO.returnBook(name,ISBN,nowday);
-        auto u = new unreturnBooksPage;//刷新页面
-        u->show();
     }
+    auto u = new unreturnBooksPage;//刷新页面
+    u->show();
     if(flag == 1){
         DIALOGMSG = "还书成功";
     }else{
