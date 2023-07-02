@@ -26,7 +26,7 @@ void User::save()
     for (int i = 0; i < vecuser.size(); i++)
     {
         ofile <<vecuser[i]._phone << endl;
-        ofile <<vecuser[i]._password << endl;
+        ofile <<CEO.encrypt(vecuser[i]._phone,vecuser[i]._password)<< endl;//保存加密的密码
         ofile <<vecuser[i]._xuehao<<endl;
         ofile <<vecuser[i]._xingming<<endl;
     }
@@ -42,6 +42,7 @@ void User::read()
     ifstream ifile;
     ifile.open("user.txt", ios::in);
     User tempUser;
+    string PASSword;
     userCount = 0;
 
 
@@ -54,7 +55,8 @@ void User::read()
     for (int i = 0; ifile>>tempUser._phone; i++)
     {
 
-        ifile >> tempUser._password;
+        ifile >> PASSword;
+        tempUser._password=CEO.decrypt(tempUser._phone,PASSword);//解密
         ifile >> tempUser._xuehao;
         ifile >> tempUser._xingming;
         vecuser.push_back(tempUser);
@@ -64,7 +66,6 @@ void User::read()
     userCount--;
     ifile.close();
 }
-
 //注册
 int User::Registers(string setAccount, string setPassword,string setXuehao,string setXingming)
 {
@@ -221,4 +222,39 @@ QString User::qPhone()
 string User::stdPassword()
 {
     return _password;
+}
+///加密
+/// 用账号的字符串每个字符ASCII码相加之和作为密钥，确保每个账号密钥不同
+///
+string User::encrypt(string Account,string Password)
+{
+//    string PASSword;
+    int key=0;
+    for(int i=0;i<Account.size();i++)
+    {
+        key+=Account[i];
+    }
+    srand(key);//初始化种子
+    for(int i=0;i<Password.size();i++)
+    {
+        Password[i]=Password[i]^rand();//按每一位进行与随机数的取反
+    }
+    return Password;
+}
+
+
+///解密
+string User::decrypt(string Account,string PASSword)
+{
+    int key=0;
+    for(int i=0;i<Account.size();i++)
+    {
+        key+=Account[i];
+    }
+    srand(key);//初始化种子
+    for(int i=0;i<PASSword.size();i++)
+    {
+        PASSword[i]=PASSword[i]^rand();//按每一位进行与随机数的取反
+    }
+    return PASSword;
 }
