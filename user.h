@@ -2,6 +2,7 @@
 #define USER_H
 #include<iostream>
 #include<QString>
+#include<stdlib.h>
 using namespace std;
 
 class User
@@ -25,6 +26,11 @@ public:
     QString qPhone();
     QString qStudentID();
     string stdPassword();
+    ///加密
+    string encrypt(string Account,string Password);
+    ///解密
+    string decrypt(string Account,string PASSword);
+
 
 };
 
