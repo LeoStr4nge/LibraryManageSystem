@@ -15,8 +15,8 @@ public:
     void read();
     int add(string setBookname,string setZuozhe,string setCubanshe,string setISBN,string setLeibei,int setGotime);
     int del(string setISBN);
-    int xiugai(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime,int setFlagexist);
-    vector<int> sousuo(string sousuoci);
+    int edit(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime,int setFlagexist);
+    vector<int> search(string sousuoci);
     QString qBookname();
     QString qAuthor();
     QString qPublisher();
@@ -24,7 +24,7 @@ public:
     QString qType();
     int qGotime();
     QString isExist();
-    int exactSearch(string sousuoci);
+    int exactlySearch(string sousuoci);
 
 private:
     string _bookName;

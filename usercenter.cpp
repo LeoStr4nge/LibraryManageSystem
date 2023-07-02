@@ -91,7 +91,7 @@ void userCenter::on_pushButton_2_clicked()
 //注销
 void userCenter::on_pushButton_3_clicked()
 {
-    CEO.zhuxiao();
+    CEO.logout();
     auto f = new FirstWindow;
     f->show();
     this->close();

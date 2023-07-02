@@ -20,10 +20,10 @@ statisticsPage::statisticsPage(QWidget *parent) :
     borCEO.read();
     //禁止用户编辑表格
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    vector<string> bookname = borCEO.getBookname();
-    vector<string> readername = borCEO.getReader();
-    vector<string> borrowDate = borCEO.getJieshuday();
-    vector<string> returnDate = borCEO.getHuanshuday();
+    vector<string> bookname = borCEO.getBooknames();
+    vector<string> readername = borCEO.getReaders();
+    vector<string> borrowDate = borCEO.getBorrowBookDates();
+    vector<string> returnDate = borCEO.getReturnBookDates();
     for(int i = 0;i < vecbor.size();i++){
         int row = ui->tableWidget->rowCount();
         ui->tableWidget->insertRow(row);
@@ -32,7 +32,7 @@ statisticsPage::statisticsPage(QWidget *parent) :
         ui->tableWidget->setItem(row,2,new QTableWidgetItem(QString::fromStdString(borrowDate[i])));
         ui->tableWidget->setItem(row,3,new QTableWidgetItem(QString::fromStdString(returnDate[i])));
     }
-    int borrowCount = borCEO.getJienum();
+    int borrowCount = borCEO.getBorrowCount();
     QString temp = ui->labelBorrowed->text();
     temp += QString::number(borrowCount);
     ui->labelBorrowed->setText(temp);

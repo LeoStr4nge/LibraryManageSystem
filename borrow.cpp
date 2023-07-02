@@ -14,10 +14,10 @@ void borrow::save()
     {
         ofile <<vecbor[i]._reader << endl;
         ofile <<vecbor[i]._readerISBN<<endl;
-        ofile <<vecbor[i]._shu.y<< endl;
-        ofile <<vecbor[i]._shu.m<< endl;
-        ofile <<vecbor[i]._shu.d<< endl;
-        ofile <<vecbor[i]._shu.jieyuetime<< endl;
+        ofile <<vecbor[i]._book.y<< endl;
+        ofile <<vecbor[i]._book.m<< endl;
+        ofile <<vecbor[i]._book.d<< endl;
+        ofile <<vecbor[i]._book.borrowTime<< endl;
 
     }
     ofile.close();
@@ -34,10 +34,10 @@ void borrow::read()
     {
 
         ifile >> tempBor._readerISBN;
-        ifile >> tempBor._shu.y;
-        ifile >> tempBor._shu.m;
-        ifile >> tempBor._shu.d;
-        ifile >> tempBor._shu.jieyuetime;
+        ifile >> tempBor._book.y;
+        ifile >> tempBor._book.m;
+        ifile >> tempBor._book.d;
+        ifile >> tempBor._book.borrowTime;
 
         vecbor.push_back(tempBor);
 
@@ -46,7 +46,7 @@ void borrow::read()
     ifile.close();
 }
 
-int borrow::jieshu(string setReader,string setISBN,Date d,int jieyueshijian)
+int borrow::borrowBook(string setReader,string setISBN,Date d,int borrowTime)
 {
     borCEO.read();
     borrow tempBor;
@@ -58,10 +58,10 @@ int borrow::jieshu(string setReader,string setISBN,Date d,int jieyueshijian)
             {
                 tempBor._reader=setReader;
                 tempBor._readerISBN=setISBN;
-                tempBor._shu.y=d.year;
-                tempBor._shu.m=d.month;
-                tempBor._shu.d=d.day;
-                tempBor._shu.jieyuetime=jieyueshijian;
+                tempBor._book.y=d.year;
+                tempBor._book.m=d.month;
+                tempBor._book.d=d.day;
+                tempBor._book.borrowTime=borrowTime;
                 vecbor.push_back(tempBor);
                 vecbook[i]._flagExist=0;
                 bookCEO.save();
@@ -81,7 +81,7 @@ int borrow::jieshu(string setReader,string setISBN,Date d,int jieyueshijian)
 
 }
 
-int borrow::huanshu(string setReader,string setISBN,Date d)
+int borrow::returnBook(string setReader,string setISBN,Date d)
 {
     borCEO.read();
     vector<borrow>::iterator it;
@@ -106,7 +106,7 @@ int borrow::huanshu(string setReader,string setISBN,Date d)
     }
 }
 
-vector<string> borrow::gerenjieshuxinxi(string setReader)
+vector<string> borrow::borrower2ISBN(string setReader)
 {
     borCEO.read();
     vector<string> result;
@@ -124,14 +124,14 @@ vector<string> borrow::gerenjieshuxinxi(string setReader)
     return result;
 }
 
-int borrow::xvjie(string setISBN,int xvjieshijian)
+int borrow::renewBook(string setISBN,int renewTime)
 {
     borCEO.read();
     for(int i=0;i<vecbor.size();i++)
     {
         if(setISBN==vecbor[i]._readerISBN)
         {
-            vecbor[i]._shu.jieyuetime+=xvjieshijian;
+            vecbor[i]._book.borrowTime+=renewTime;
             borCEO.save();
             qDebug("续借成功");
             return 1;
@@ -160,32 +160,32 @@ vector<int> borrow::getBorrowID(string setReader)
 
 
 //计算还书日期
-Date borrow::huanshuriqi(Date jieshuday,int jieyueshijian)
+Date borrow::returnBookDate(Date borrowDate,int borrowTime)
 {
     Date huanshuday;
-    huanshuday = jieshuday + jieyueshijian;
+    huanshuday = borrowDate + borrowTime;
     return huanshuday;
 }
 
 //获取借书日期类
-Date borrow::jieshuriqi(borrow x)
+Date borrow::borrowBookDate(borrow x)
 {
     Date jieshuday;
-    jieshuday.year=x._shu.y;
-    jieshuday.month=x._shu.m;
-    jieshuday.day=x._shu.d;
+    jieshuday.year=x._book.y;
+    jieshuday.month=x._book.m;
+    jieshuday.day=x._book.d;
     return jieshuday;
 
 }
 
 //获取借书时间
 int borrow::getBorrowTime(){
-    return this->_shu.jieyuetime;
+    return this->_book.borrowTime;
 }
 
 
 //获取全借书人
-vector<string> borrow::getReader()
+vector<string> borrow::getReaders()
 {
     vector<string> readerName;
     for(int i=0;i<vecbor.size();i++)
@@ -196,13 +196,13 @@ vector<string> borrow::getReader()
 }
 
 //获取全书名
-vector<string> borrow::getBookname()
+vector<string> borrow::getBooknames()
 {
     vector<string> temp;
     for(int i=0;i<vecbor.size();i++)
     {
         int j;
-        j=bookCEO.exactSearch(vecbor[i]._readerISBN);
+        j=bookCEO.exactlySearch(vecbor[i]._readerISBN);
         temp.push_back(vecbook[j]._bookName);
     }
     return temp;
@@ -211,48 +211,43 @@ vector<string> borrow::getBookname()
 
 //获取全借书日期
 
-vector<string> borrow::getJieshuday()
+vector<string> borrow::getBorrowBookDates()
 {
     vector<string> temp;
     string a;
     for(int i=0;i<vecbor.size();i++)
     {
-        a=to_string(vecbor[i]._shu.y)+"年"+to_string(vecbor[i]._shu.m)+"月"+to_string(vecbor[i]._shu.d)+"日";
+        a=to_string(vecbor[i]._book.y)+"年"+to_string(vecbor[i]._book.m)+"月"+to_string(vecbor[i]._book.d)+"日";
         temp.push_back(a);
     }
     return temp;
 }
 
 //获取全还书日期
-vector<string> borrow::getHuanshuday()
+vector<string> borrow::getReturnBookDates()
 {
     vector<string> temp;
     Date d1,d2;
     string a;
     for(int i=0;i<vecbor.size();i++)
     {
-        d1.day=vecbor[i]._shu.d;
-        d1.month=vecbor[i]._shu.m;
-        d1.year=vecbor[i]._shu.y;
-        d2=d1+vecbor[i]._shu.jieyuetime;
+        d1.day=vecbor[i]._book.d;
+        d1.month=vecbor[i]._book.m;
+        d1.year=vecbor[i]._book.y;
+        d2=d1+vecbor[i]._book.borrowTime;
         a=to_string(d2.year)+"年"+to_string(d2.month)+"月"+to_string(d2.day)+"日";
         temp.push_back(a);
     }
     return temp;
 }
 //获取借阅数
-int borrow::getJienum()
+int borrow::getBorrowCount()
 {
     return vecbor.size();
 }
-//获取总图书数
-int getAllnum()
-{
-    return vecbook.size();
-}
 
 //根据ISBN获取借书日期
-string borrow::haveISBN2jieshuday(string setISBN)
+string borrow::ISBN2BorrowDate(string setISBN)
 {
     borCEO.read();
     Date d1,d2;
@@ -261,9 +256,9 @@ string borrow::haveISBN2jieshuday(string setISBN)
     {
         if(setISBN==vecbor[i]._readerISBN)
         {
-            d1.day=vecbor[i]._shu.d;
-            d1.month=vecbor[i]._shu.m;
-            d1.year=vecbor[i]._shu.y;
+            d1.day=vecbor[i]._book.d;
+            d1.month=vecbor[i]._book.m;
+            d1.year=vecbor[i]._book.y;
             a=to_string(d1.year)+"年"+to_string(d1.month)+"月"+to_string(d1.day)+"日";
             return a;
         }
@@ -271,7 +266,7 @@ string borrow::haveISBN2jieshuday(string setISBN)
 }
 
 //根据ISBN获取还书日期
-string borrow::haveISBN2huanshuday(string setISBN)
+string borrow::ISBN2ReturnBookDates(string setISBN)
 {
     borCEO.read();
     Date d1,d2;
@@ -280,10 +275,10 @@ string borrow::haveISBN2huanshuday(string setISBN)
     {
         if(setISBN==vecbor[i]._readerISBN)
         {
-            d1.day=vecbor[i]._shu.d;
-            d1.month=vecbor[i]._shu.m;
-            d1.year=vecbor[i]._shu.y;
-            d2=d1+vecbor[i]._shu.jieyuetime;
+            d1.day=vecbor[i]._book.d;
+            d1.month=vecbor[i]._book.m;
+            d1.year=vecbor[i]._book.y;
+            d2=d1+vecbor[i]._book.borrowTime;
             a=to_string(d2.year)+"年"+to_string(d2.month)+"月"+to_string(d2.day)+"日";
             return a;
         }

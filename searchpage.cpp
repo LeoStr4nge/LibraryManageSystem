@@ -52,7 +52,7 @@ void searchPage::on_pushButton_clicked()
     ui->tableWidget->setRowCount(0);
     //搜索
     string s = ui->lineEditSearch->text().toStdString();
-    vector<int> searchResult = bookCEO.sousuo(s);
+    vector<int> searchResult = bookCEO.search(s);
     for(int i = 0;i < searchResult.size();i++){
         int row = ui->tableWidget->rowCount();
         ui->tableWidget->insertRow(row);
@@ -72,7 +72,7 @@ void searchPage::on_pushButton_3_clicked()
     string name = CEO.qName().toStdString();
     Date now;
     int Days = ui->comboBox->currentText().toUInt();
-    int flag = borCEO.jieshu(name,ISBN,now,Days);
+    int flag = borCEO.borrowBook(name,ISBN,now,Days);
     ui->pushButton->click();
     if(flag == 0){
         DIALOGMSG = "该书已被借出";

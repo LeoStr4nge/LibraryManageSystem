@@ -27,11 +27,11 @@ unreturnBooksPage::unreturnBooksPage(QWidget *parent) :
     ui->lineEdit->setValidator(validator);
     //显示未归还的图书
     string name = CEO.qName().toStdString();//用户名
-    vector<string> temp = borCEO.gerenjieshuxinxi(name);
+    vector<string> temp = borCEO.borrower2ISBN(name);
     vector<int> unreturnedBooks;
     vector<int> borrowID = borCEO.getBorrowID(name);
     for (int i = 0;i < temp.size();i++) {
-        int bookID = bookCEO.exactSearch(temp[i]);
+        int bookID = bookCEO.exactlySearch(temp[i]);
        unreturnedBooks.push_back(bookID);
     }
     for(int i = 0;i < unreturnedBooks.size();i++){
@@ -43,9 +43,9 @@ unreturnBooksPage::unreturnBooksPage(QWidget *parent) :
         ui->tableWidget->setItem(row,3,new QTableWidgetItem(vecbook[unreturnedBooks[i]].qPublisher()));
         ui->tableWidget->setItem(row,4,new QTableWidgetItem(vecbook[unreturnedBooks[i]].qType()));
         //计算还书日期
-        auto borrowDate = borCEO.jieshuriqi(vecbor[borrowID[i]]);//获取借书日期
+        auto borrowDate = borCEO.borrowBookDate(vecbor[borrowID[i]]);//获取借书日期
         auto borrowTime = vecbor[borrowID[i]].getBorrowTime();//获取借书时间
-        Date returnDate = borCEO.huanshuriqi(borrowDate,borrowTime);//计算还书日期
+        Date returnDate = borCEO.returnBookDate(borrowDate,borrowTime);//计算还书日期
         QString qReturnDate = QString::number(returnDate.year) + "年" + QString::number(returnDate.month) + "月" + QString::number(returnDate.day) + "日";//转换成Qt字符串
         ui->tableWidget->setItem(row,5,new QTableWidgetItem(qReturnDate));
     }
@@ -69,7 +69,7 @@ void unreturnBooksPage::on_pushButton_clicked()
     std::string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();//得到目标图书的ISBN
     string name = CEO.qName().toStdString();//名字
     Date nowday;
-    int flag = borCEO.huanshu(name,ISBN,nowday);
+    int flag = borCEO.returnBook(name,ISBN,nowday);
     auto u = new unreturnBooksPage;//刷新页面
     u->show();
     if(flag == 1){
@@ -90,7 +90,7 @@ void unreturnBooksPage::on_pushButton_2_clicked()
         std::string ISBN = ui->tableWidget->model()->index(i,1).data().toString().toStdString();
         string name = CEO.qName().toStdString();//名字
         Date nowday;
-        flag = borCEO.huanshu(name,ISBN,nowday);
+        flag = borCEO.returnBook(name,ISBN,nowday);
         auto u = new unreturnBooksPage;//刷新页面
         u->show();
     }
@@ -109,7 +109,7 @@ void unreturnBooksPage::on_pushButton_4_clicked()
     int bookID = ui->lineEdit->text().toInt();
     std::string ISBN = ui->tableWidget->model()->index(bookID - 1,1).data().toString().toStdString();//得到目标图书的ISBN
     int days = ui->comboBox->currentText().toInt();
-    int flag = borCEO.xvjie(ISBN,days);
+    int flag = borCEO.renewBook(ISBN,days);
     auto u = new unreturnBooksPage;//刷新页面
     u->show();
     if(flag == 1){

@@ -47,7 +47,7 @@ void bookEditPage::on_pushButton_clicked()
     ui->tableWidget->setRowCount(0);
     //搜索
     std::string s = ui->lineEdit->text().toStdString();
-    std::vector<int> searchResult = bookCEO.sousuo(s);
+    std::vector<int> searchResult = bookCEO.search(s);
     //ui->tableWidget->setColumnCount(result.size());
     for(int i = 0;i < searchResult.size();i++){
         int row = ui->tableWidget->rowCount();
@@ -59,7 +59,7 @@ void bookEditPage::on_pushButton_clicked()
         ui->tableWidget->setItem(row,4,new QTableWidgetItem(vecbook[searchResult[i]].qType()));
         ui->tableWidget->setItem(row,5,new QTableWidgetItem(vecbook[searchResult[i]].isExist()));
         string ISBN = vecbook[searchResult[i]].qISBN().toStdString();
-        string returnDate = borCEO.haveISBN2huanshuday(ISBN);
+        string returnDate = borCEO.ISBN2ReturnBookDates(ISBN);
         ui->tableWidget->setItem(row,6,new QTableWidgetItem(QString::fromStdString(returnDate)));
     }
     int row = ui->tableWidget->rowCount();
@@ -77,7 +77,7 @@ void bookEditPage::on_pushButton_4_clicked()
             string type = ui->tableWidget->model()->index(i,4).data().toString().toStdString();
             int flagExist = ui->tableWidget->model()->index(i,5).data().toInt();
             int date = ui->tableWidget->model()->index(i,6).data().toInt();
-            bookCEO.xiugai(bookName,author,publisher,ISBN,type,date,flagExist);
+            bookCEO.edit(bookName,author,publisher,ISBN,type,date,flagExist);
     }
     DIALOGMSG = "修改成功";
     ui->pushButton->click();

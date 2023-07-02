@@ -110,7 +110,7 @@ int book::del(string setISBN)
 }
 
 //修改
-int book::xiugai(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime,int setFlagexist)
+int book::edit(string setBookname, string setZuozhe, string setCubanshe, string setISBN, string setLeibei, int setGotime,int setFlagexist)
 {
     book tempBook;
     tempBook._bookName = setBookname;
@@ -137,12 +137,12 @@ int book::xiugai(string setBookname, string setZuozhe, string setCubanshe, strin
 
 
 //搜索
-vector<int> book::sousuo(string sousuoci)
+vector<int> book::search(string keyWords)
 {
     bookCEO.read();
     vector<int> result;
 
-    if (sousuoci.empty())
+    if (keyWords.empty())
     {
         for (int i = 0; i < vecbook.size(); i++)
         {
@@ -157,7 +157,7 @@ vector<int> book::sousuo(string sousuoci)
 
     for (int i = 0; i < vecbook.size(); i++)
     {
-        if (vecbook[i]._bookName==sousuoci||vecbook[i]._zuozhe==sousuoci||vecbook[i]._chubanshe==sousuoci||vecbook[i]._ISBN==sousuoci||vecbook[i]._leibie==sousuoci)
+        if (vecbook[i]._bookName==keyWords||vecbook[i]._zuozhe==keyWords||vecbook[i]._chubanshe==keyWords||vecbook[i]._ISBN==keyWords||vecbook[i]._leibie==keyWords)
         {
             result.push_back(i);
         }
@@ -188,7 +188,7 @@ QString book::isExist(){
 }
 
 //根据ISBN精确找到一本书的序号，用于搭配borrow类使用
-int book::exactSearch(string sousuoci)
+int book::exactlySearch(string sousuoci)
 {
     bookCEO.read();
     int result;

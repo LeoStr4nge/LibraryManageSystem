@@ -27,8 +27,8 @@ void User::save()
     {
         ofile <<vecuser[i]._phone << endl;
         ofile <<vecuser[i]._password << endl;
-        ofile <<vecuser[i]._xuehao<<endl;
-        ofile <<vecuser[i]._xingming<<endl;
+        ofile <<vecuser[i]._studentID<<endl;
+        ofile <<vecuser[i]._name<<endl;
     }
     ofile.close();
 }
@@ -55,8 +55,8 @@ void User::read()
     {
 
         ifile >> tempUser._password;
-        ifile >> tempUser._xuehao;
-        ifile >> tempUser._xingming;
+        ifile >> tempUser._studentID;
+        ifile >> tempUser._name;
         vecuser.push_back(tempUser);
 
         userCount++;
@@ -66,7 +66,7 @@ void User::read()
 }
 
 //注册
-int User::Registers(string setAccount, string setPassword,string setXuehao,string setXingming)
+int User::Registers(string setAccount, string setPassword,string setStudentID,string setName)
 {
     //检测异常继续向上抛出
     try {
@@ -88,8 +88,8 @@ int User::Registers(string setAccount, string setPassword,string setXuehao,strin
 
     tempUser._phone = setAccount;
     tempUser._password = setPassword;
-    tempUser._xuehao=setXuehao;
-    tempUser._xingming=setXingming;
+    tempUser._studentID=setStudentID;
+    tempUser._name=setName;
 
     vecuser.push_back(tempUser);
     CEO.save();
@@ -122,8 +122,8 @@ int User::Login(string setAccount, string setPassword)
                 //登陆成功
                 qDebug("登陆成功");
                 //获取信息
-                tempUser._xuehao=vecuser[i]._xuehao;
-                tempUser._xingming=vecuser[i]._xingming;
+                tempUser._studentID=vecuser[i]._studentID;
+                tempUser._name=vecuser[i]._name;
                 CEO=tempUser;
                 //返回1
                 return 1;
@@ -159,9 +159,9 @@ void User::edit(string name,string phone,string studentID,string password)
         throw e;
     }
     //修改CEO里的信息
-    CEO._xingming = name;
+    CEO._name = name;
     CEO._phone = phone;
-    CEO._xuehao = studentID;
+    CEO._studentID = studentID;
     CEO._password = password;
     User tempUser;
     tempUser=CEO;
@@ -178,7 +178,7 @@ void User::edit(string name,string phone,string studentID,string password)
 }
 
 //注销
-void User::zhuxiao()
+void User::logout()
 {
     try {
         CEO.read();
@@ -205,12 +205,12 @@ void User::zhuxiao()
 //导出类内信息
 QString User::qName()
 {
-    QString name = QString::fromStdString(_xingming);
+    QString name = QString::fromStdString(_name);
     return name;
 }
 QString User::qStudentID()
 {
-    QString studentID = QString::fromStdString(_xuehao);
+    QString studentID = QString::fromStdString(_studentID);
     return studentID;
 }
 QString User::qPhone()
