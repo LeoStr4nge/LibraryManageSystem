@@ -17,20 +17,20 @@ signUpPage::signUpPage(QWidget *parent) :
     ui->setupUi(this);
     //设置非法输入
     //姓名
-    QRegExp regx1("^[\u4e00-\u9fa5]{0,}$");
-    QValidator *validator1 = new QRegExpValidator(regx1,ui->lineEdit);
+    QRegularExpression regx1("^[\u4e00-\u9fa5]{0,}$");
+    QValidator *validator1 = new QRegularExpressionValidator(regx1,ui->lineEdit);
     ui->lineEdit->setValidator(validator1);
     //学号
-    QRegExp regx2("[0-9]{0,10}");
-    QValidator *validator2 = new QRegExpValidator(regx2,ui->lineEdit_2);
+    QRegularExpression regx2("[0-9]{0,10}");
+    QValidator *validator2 = new QRegularExpressionValidator(regx2,ui->lineEdit_2);
     ui->lineEdit_2->setValidator(validator2);
     //手机号
-    QRegExp regx3("[0-9]{0,11}");
-    QValidator *validator3 = new QRegExpValidator(regx3,ui->lineEdit_3);
+    QRegularExpression regx3("[0-9]{0,11}");
+    QValidator *validator3 = new QRegularExpressionValidator(regx3,ui->lineEdit_3);
     ui->lineEdit_3->setValidator(validator3);
     //密码
-    QRegExp regx4("^[A-Za-z0-9]{6,16}$");
-    QValidator *validator4 = new QRegExpValidator(regx4,ui->lineEdit_4);
+    QRegularExpression regx4("^[A-Za-z0-9]{6,16}$");
+    QValidator *validator4 = new QRegularExpressionValidator(regx4,ui->lineEdit_4);
     ui->lineEdit_4->setValidator(validator4);
     ui->lineEdit_5->setValidator(validator4);
 }

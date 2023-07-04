@@ -22,8 +22,8 @@ unreturnBooksPage::unreturnBooksPage(QWidget *parent) :
     //禁止用户编辑表格
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //设置序号的非法输入
-    QRegExp regx("[0-9]");
-    QValidator *validator = new QRegExpValidator(regx,ui->lineEdit);
+    QRegularExpression regx("[0-9]");
+    QValidator *validator = new QRegularExpressionValidator(regx,ui->lineEdit);
     ui->lineEdit->setValidator(validator);
     //显示未归还的图书
     string name = CEO.qName().toStdString();//用户名

@@ -1,7 +1,6 @@
 #include "firstwindow.h"
 #include "ui_firstwindow.h"
 #include "userpage.h"
-#include "ui_userpage.h"
 #include "adminpage.h"
 #include "user.h"
 #include <QValidator>
@@ -20,12 +19,12 @@ FirstWindow::FirstWindow(QWidget *parent)
     ui->setupUi(this);
     //设置非法输入
     //账号
-    QRegExp regx("[a-zA-Z0-9\-\\\_]{11}");
-    QValidator *validator = new QRegExpValidator(regx,ui->lineEdit);
+    QRegularExpression regx("[a-zA-Z0-9\-\\\_]{11}");
+    QValidator *validator = new QRegularExpressionValidator(regx,ui->lineEdit);
     ui->lineEdit->setValidator(validator);
     //密码
-    QRegExp regx2("[a-zA-Z0-9\-\\\_]{16}");
-    QValidator *validator2 = new QRegExpValidator(regx2,ui->lineEdit_2);
+    QRegularExpression regx2("[a-zA-Z0-9\-\\\_]{16}");
+    QValidator *validator2 = new QRegularExpressionValidator(regx2,ui->lineEdit_2);
     ui->lineEdit_2->setValidator(validator2);
 }
 

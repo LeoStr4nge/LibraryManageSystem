@@ -23,8 +23,8 @@ searchPage::searchPage(QWidget *parent) :
     //禁止用户编辑表格
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //设置序号的非法输入
-    QRegExp regx("[0-9]");
-    QValidator *validator = new QRegExpValidator(regx,ui->lineEditBorrow);
+    QRegularExpression regx("[0-9]");
+    QValidator *validator = new QRegularExpressionValidator(regx,ui->lineEditBorrow);
     ui->lineEditBorrow->setValidator(validator);
 }
 

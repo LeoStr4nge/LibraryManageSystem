@@ -16,16 +16,16 @@ userCenter::userCenter(QWidget *parent) :
     ui->setupUi(this);
     //设置非法输入
     //姓名
-    QRegExp regx1("^[\u4e00-\u9fa5]{0,}$");
-    QValidator *validator1 = new QRegExpValidator(regx1,ui->lineEdit);
+    QRegularExpression regx1("^[\u4e00-\u9fa5]{0,}$");
+    QValidator *validator1 = new QRegularExpressionValidator(regx1,ui->lineEdit);
     ui->lineEdit->setValidator(validator1);
     //学号
-    QRegExp regx2("[0-9]{0,10}");
-    QValidator *validator2 = new QRegExpValidator(regx2,ui->lineEdit_5);
+    QRegularExpression regx2("[0-9]{0,10}");
+    QValidator *validator2 = new QRegularExpressionValidator(regx2,ui->lineEdit_5);
     ui->lineEdit_5->setValidator(validator2);
     //密码
-    QRegExp regx3("^[A-Za-z0-9]{6,16}$");
-    QValidator *validator4 = new QRegExpValidator(regx3,ui->lineEdit_2);
+    QRegularExpression regx3("^[A-Za-z0-9]{6,16}$");
+    QValidator *validator4 = new QRegularExpressionValidator(regx3,ui->lineEdit_2);
     ui->lineEdit_2->setValidator(validator4);
     ui->lineEdit_3->setValidator(validator4);
     //获取CEO中的信息并加载到页面中
@@ -76,7 +76,7 @@ void userCenter::on_pushButton_2_clicked()
     std::string password;
     //比较两次密码是否一致
     if(tempPwd == tempPwd2){
-        if(temp == NULL){
+        if(temp.isEmpty()){
             password = CEO.stdPassword();//原密码
         }else{
             password = tempPwd;//新密码
